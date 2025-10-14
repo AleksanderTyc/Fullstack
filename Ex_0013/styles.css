@@ -4,8 +4,24 @@
 
 .glogo {
     width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
 }
 
 .ginput {
     width: 400px;
+    height: 24px;
+    /* line-height: 24px; - recommended by StackOverflow */
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+
+    border-radius: 26px;
+    border-color: #dadce0;
+    border-width: 1px;
+    border-style: solid;
+
+    padding: 10px 30px;
 }
