@@ -1,0 +1,21 @@
+.flex-outer {
+    display: flex;
+    justify-content: center;
+    background-color: bisque;
+}
+
+.flex-inner {
+    display: flex;
+    justify-content: space-evenly;
+    width: 80%;
+    margin: 20px 40px;
+    background-color: aqua;
+    padding: 20px 40px;
+    border-bottom: 5px solid blue;
+}
+
+.flex-stacked {
+    text-align: center;
+    display: block;
+    
+}
