@@ -2,12 +2,6 @@
     width: 400px;
 }
 
-.dotted-blue-border {
-    border-style: dotted;
-    border-color: blue;
-    border-width: 1px;
-}
-
 .card {
     display: flex;
     justify-content: space-evenly;
@@ -16,8 +10,8 @@
     /* margin-left: auto;
     margin-right: auto; */
     padding: 20px;
-    background-color: #ddebf8;
-    border-bottom: 5px solid #d8cefe;
+    background-color: #ffe6a7;
+    border-bottom: 5px solid #99582a;
 }
 
 /* Notice that:
@@ -26,7 +20,7 @@
 */
 .flex-stacked {
     text-align: center;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    color: #2b2839;
+    font-family: cursive; /* Firefox handles correctly, Chrome defaults to serif */
+    color: #432818;
     display: block;
 }
