@@ -1,5 +1,22 @@
+/*
+.orbitron-<uniquifier> {
+  font-style: normal;
+}
+*/
 body {
     color: white;
+    text-align: center;
     background-image: url("images/greg-rakozy-oMpAz-DN-9I-unsplash.jpg");
     background-size: cover;
+    font-family: "Orbitron", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+}
+
+.btn-apply {
+    padding: 8px 16px;
+    background-color: white;
+    border-style: none;
+    font-family: inherit;
+    /* font-weight: bold; */
 }
