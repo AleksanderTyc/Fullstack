@@ -15,26 +15,16 @@
     margin-left: auto;
     margin-right: auto;
     padding: 20px;
+    background-color: #ddebf8;
+    border-bottom: 5px solid #d8cefe;
 }
 
-.flex-outer {
-    display: flex;
-    justify-content: center;
-    background-color: bisque;
-}
-
-.flex-inner {
-    display: flex;
-    justify-content: space-evenly;
-    width: 80%;
-    margin: 20px 40px;
-    background-color: aqua;
-    padding: 20px 40px;
-    border-bottom: 5px solid blue;
-}
-
+/* Notice that:
+- display is not necessary, because all elements (hn, p) take entire line anyway;
+- text-align and color could be included into .card class, because they do not affect the image
+*/
 .flex-stacked {
     text-align: center;
+    color: #2b2839;
     display: block;
-    
 }
