@@ -4,13 +4,21 @@
     font-style: normal;
 }
 
+body {
+    margin: 0;
+}
+
 .hero {
+    color: #fff;
     text-align: center;
+    text-shadow: 0 0 1px black;
+    background-color: #a2d2ff;
+    padding-top: 20px;
 }
 
 #img-hero {
     width: 200px;
     height: 200px;
     border-radius: 100px;
-    border-color: pink;
+    border: 6px solid #efb0c9;
 }
