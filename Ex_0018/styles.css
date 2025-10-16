@@ -22,7 +22,11 @@ https://www.1001fonts.com/scribblegothic-font.html
 body {
     color: white;
     text-align: center;
-    background-image: url("images/greg-rakozy-oMpAz-DN-9I-unsplash.jpg");
+    /* Static */
+    /* background-image: url("images/greg-rakozy-oMpAz-DN-9I-unsplash.jpg"); */
+    /* background-size: cover; */
+    /* Anim */
+    background-image: url("https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExOTNrNmI4dndkOXJxeW83cW9hZnBsZW9rN3d1a3IxbzI3d3pqcjQ5NyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/4ydWTcMBjimLbT1CHi/giphy.gif");
     background-size: cover;
     font-family: "Orbitron", sans-serif;
     /* font-family: "ScribbleGothic", sans-serif; */
@@ -40,7 +44,11 @@ body {
 
 .sect-undrl {
     /* My way */
-    /* text-decoration: underline; */
+    text-decoration: underline;
     /* Their way */
-    border-bottom: 4px solid white;
+    /* border-bottom: 4px solid white; */
+}
+
+#spacex-logo {
+    width: 200px;
 }
