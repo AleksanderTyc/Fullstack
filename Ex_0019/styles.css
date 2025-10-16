@@ -1,0 +1,16 @@
+.happy-monkey-regular {
+    font-family: "Happy Monkey", system-ui;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.hero {
+    text-align: center;
+}
+
+#img-hero {
+    width: 200px;
+    height: 200px;
+    border-radius: 100px;
+    border-color: pink;
+}
