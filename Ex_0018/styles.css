@@ -37,3 +37,10 @@ body {
     font-family: inherit;
     /* font-weight: bold; */
 }
+
+.sect-undrl {
+    /* My way */
+    /* text-decoration: underline; */
+    /* Their way */
+    border-bottom: 4px solid white;
+}
