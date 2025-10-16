@@ -41,6 +41,10 @@ body {
     padding: 10px 0 40px 0;
 }
 
+.hero-text {
+    text-shadow: 0 0 4px black;
+}
+
 .btn-apply {
     padding: 8px 16px;
     background-color: white;
