@@ -22,3 +22,12 @@ body {
     border-radius: 100px;
     border: 6px solid #efb0c9;
 }
+
+h2, h4 {
+    background-color: #efb0c9;
+    display: flex;
+    justify-content: space-evenly;
+    width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+}
