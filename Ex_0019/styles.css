@@ -23,11 +23,12 @@ body {
     border: 6px solid #efb0c9;
 }
 
-h2, h4 {
+h2,
+h4 {
     background-color: #efb0c9;
-    display: flex;
+    /* display: flex; */
+    display: inline;
     justify-content: space-evenly;
-    width: 400px;
     margin-left: auto;
     margin-right: auto;
 }
