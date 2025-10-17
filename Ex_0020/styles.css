@@ -1,6 +1,19 @@
 .container {
     border: 8px solid #016a26;
     height: 260px;
+
+    /* V1 */
+    display: flex;
+
+    /* V2 */
+    justify-content: end;
+
+    /* V3 */
+    align-items: center;
+
+    /* Challenge */
+    justify-content: space-around;
+    align-items: start;
 }
 
 .item {
@@ -12,3 +25,9 @@
     border: 2px solid black;
     background: linear-gradient(#14463d, #016a26);
 }
+
+/* By default <div> elements are display:block */
+/* V1 - now they are on a single line, each element has its own column 4:31:03 */
+/* V2 - horizontal alignment (main axis): start, center, end, space-{around|between|evenly} */
+/* V3 - vertical alignment (cross axis): start, center, end, default is stretch - take entire column */
+/* Note how .container.height plays role where align-items end is. */
