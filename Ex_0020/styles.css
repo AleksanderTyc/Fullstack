@@ -14,6 +14,23 @@
     /* Challenge */
     justify-content: space-around;
     align-items: start;
+
+    /* V4 */
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: end;
+
+    /* Challenge */
+    justify-content: center;
+    align-items: start;
+
+    /* Challenge */
+    justify-content: space-between;
+    align-items: end;
+
+    /* Challenge */
+    justify-content: start;
+    align-items: center;
 }
 
 .item {
@@ -31,3 +48,7 @@
 /* V2 - horizontal alignment (main axis): start, center, end, space-{around|between|evenly} */
 /* V3 - vertical alignment (cross axis): start, center, end, default is stretch - take entire column */
 /* Note how .container.height plays role where align-items end is. */
+/* V4 - No longer in a line - now we can control
+        if they stack horizontally or vertically and behaviour within column
+        Also notice that with flex-direction column, main axis is now vertical and cross axis is horizontal.
+*/
