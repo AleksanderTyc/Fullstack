@@ -30,19 +30,34 @@ body {
     margin: 0 0 20px 0;
 }
 
-h2,
-h4 {
-    background-color: #efb0c9;
-}
-
 #bday-age {
+    background-color: #efb0c9;
     padding: 5px 10px;
     border-radius: 5px;
     margin: 5px 0 10px 0;
 }
 
 #bday-date {
+    background-color: #efb0c9;
     padding: 5px 10px;
     border-radius: 5px;
-    margin:  0;
+    margin: 0;
+}
+
+.gift-section {
+    margin-top: 20px;
+}
+
+.gift-happy {
+    margin-bottom: 0;
+}
+
+.gift-hover {
+    margin-top: 10px;
+}
+
+.gift-img {
+    width: 400px;
+    border: 5px solid white;
+    border-radius: 5px;
 }
