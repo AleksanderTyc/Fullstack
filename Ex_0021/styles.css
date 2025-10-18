@@ -1,0 +1,15 @@
+a {
+    text-align: center;
+    color: white;
+    background-color: red;
+    padding: 25px 0;
+    font-size: 30px;
+    font-weight: bold;
+    display: block;
+    margin: 5px 0;
+    text-decoration: none;
+}
+
+a:hover {
+    background-color: darkred;
+}
