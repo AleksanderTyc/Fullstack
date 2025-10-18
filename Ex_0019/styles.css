@@ -49,7 +49,7 @@ body {
 }
 
 .gift-happy {
-    margin-bottom: 0;
+    margin-bottom: 10;
 }
 
 .gift-hover {
@@ -72,4 +72,11 @@ body {
 
 #img-gift-2:hover {
     background-image: url("images/hot.gif");
+}
+
+#img-gift-3 {
+    height: 200px;
+}
+#img-gift-3:hover {
+    background-image: url("images/cheers.gif");
 }
