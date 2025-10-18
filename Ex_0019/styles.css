@@ -63,8 +63,13 @@ body {
     background-size: cover;
     border: 5px solid white;
     border-radius: 5px;
+    margin: 0 auto;
 }
 
 #img-gift-1:hover {
     background-image: url("images/640px-Aldrin_Apollo_11_head.jpg");
+}
+
+#img-gift-2:hover {
+    background-image: url("images/hot.gif");
 }
