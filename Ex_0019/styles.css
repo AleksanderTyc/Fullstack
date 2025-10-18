@@ -14,6 +14,12 @@ body {
     text-shadow: 0 0 1px black;
     background-color: #a2d2ff;
     padding-top: 20px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    
 }
 
 #img-hero {
@@ -26,9 +32,6 @@ body {
 h2,
 h4 {
     background-color: #efb0c9;
-    /* display: flex; */
-    display: inline;
-    justify-content: space-evenly;
-    margin-left: auto;
-    margin-right: auto;
+    /* margin-left: auto;
+    margin-right: auto; */
 }
