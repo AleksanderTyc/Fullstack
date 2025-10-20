@@ -1,11 +1,51 @@
-.div-hero {
+body {
+    background-color: lightgray;
+    display: flex;
+    justify-content: center;
+
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+.overall {
     background-image: url("images/Bydgoszcz_spichrze_most_staromiejski_zabytki_fot_Robert_Sawicki.jpg");
     background-size: cover;
+    width: 900px;
+    background-color: white;
+    border: 8px solid white;
+    border-radius: 20px;
+}
+
+.div-hero {
+    padding: 200px 0;
+
+    color: white;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.div-hero-header {
+    background-color: #656d4a;
+    padding: 8px 16px;
+    border-radius: 5px;
+}
+
+.div-hero-slogan {
+    background-color: #414833;
+    padding: 5px;
+    width: 340px;
+    text-align: center;
 }
 
 #todos-header {
     width: 900px;
-    margin: 20px auto 0px;
+    margin: 0 auto 0px;
     text-align: center;
     background-color: #c2c5aa;
     padding: 20px 0 20px;
@@ -22,13 +62,16 @@
 .todo {
     width: 300px;
     text-align: center;
-    padding: 20px 20px 0px;
 }
 
 .todo-img {
     width: 120px;
     height: 120px;
     border-radius: 60px;
+}
+
+.todo-pgraph {
+    padding: 0 20px 0;
 }
 
 #card-guide {
@@ -39,8 +82,7 @@
 
     background-color: #a4ac86;
     border-bottom: 5px solid #656d4a;
-    ;
-
+    border-radius: 10px;
 }
 
 .img-business {
