@@ -3,19 +3,48 @@
     background-size: cover;
 }
 
-#card-guide {
-    width: 700px;
+#todos-header {
+    width: 900px;
+    margin: 20px auto 0px;
+    text-align: center;
+    background-color: #c2c5aa;
+    padding: 20px 0 20px;
+}
+
+#todos-box {
+    display: flex;
+    flex-direction: row;
+    width: 900px;
     margin: 0 auto;
+    background-color: #c2c5aa;
+}
+
+.todo {
+    width: 300px;
+    text-align: center;
+    padding: 20px 20px 0px;
+}
+
+.todo-img {
+    width: 120px;
+    height: 120px;
+    border-radius: 60px;
+}
+
+#card-guide {
+    width: 600px;
+    margin: 40px auto 0px;
     display: flex;
     justify-content: space-evenly;
 
     background-color: #a4ac86;
-    border-bottom: 5px solid #656d4a;;
+    border-bottom: 5px solid #656d4a;
+    ;
 
 }
 
 .img-business {
-    width: 400px;
+    width: 300px;
     padding: 20px 10px 20px 20px;
 }
 
