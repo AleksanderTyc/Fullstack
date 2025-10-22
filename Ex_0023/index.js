@@ -10,4 +10,9 @@ const increment = () => {
 
 const save = () => {
     console.log(`Save function * counter is ${count}`);
+    let newText = document.getElementById("prev-entr").innerText;
+    newText = newText + " " + count + " -";
+    document.getElementById("prev-entr").innerText = newText;
+    count = 0;
+    document.getElementById("count-el").innerText = count;
 }
