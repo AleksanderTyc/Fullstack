@@ -12,15 +12,15 @@ a {
 }
 
 .overall {
-    background-image: url("images/Bydgoszcz_spichrze_most_staromiejski_zabytki_fot_Robert_Sawicki.jpg");
-    background-size: cover;
-    width: 900px;
+    width: 898px;
     background-color: white;
     border: 8px solid white;
     border-radius: 20px;
 }
 
 .div-hero {
+    background-image: url("images/Bydgoszcz_spichrze_most_staromiejski_zabytki_fot_Robert_Sawicki.jpg");
+    background-size: cover;
     padding: 200px 0;
 
     color: white;
@@ -28,6 +28,9 @@ a {
     display: flex;
     flex-direction: column;
     align-items: center;
+    border: 1px solid darkgray;
+    border-bottom: none;
+    border-radius: 20px 20px 0 0;
 }
 
 .div-hero-header {
@@ -44,23 +47,27 @@ a {
 }
 
 #todos-header {
-    width: 900px;
+    width: 898px;
     margin: 0 auto 0px;
     text-align: center;
     background-color: #c2c5aa;
     padding: 20px 0 20px;
+    border-left: 1px solid darkgray;
+    border-right: 1px solid darkgray;
 }
 
 #todos-box {
     display: flex;
     flex-direction: row;
-    width: 900px;
+    width: 898px;
     margin: 0 auto;
     background-color: #c2c5aa;
+    border-left: 1px solid darkgray;
+    border-right: 1px solid darkgray;
 }
 
 .todo {
-    width: 300px;
+    width: 299px;
     text-align: center;
 }
 
@@ -72,6 +79,17 @@ a {
 
 .todo-pgraph {
     padding: 0 20px 0;
+}
+
+#card-overall {
+    border: 1px solid darkgray;
+    /* border-bottom: 1px solid black; */
+    border-top: none;
+    /* margin: 40px auto 0px; */
+    padding-top: 20px;
+    padding-bottom: 10px;
+    border-radius: 0 0 20px 20px;
+
 }
 
 #card-guide {
