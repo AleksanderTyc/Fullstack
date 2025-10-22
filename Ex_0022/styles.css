@@ -47,7 +47,7 @@ a {
 }
 
 #todos-header {
-    width: 898px;
+    width: 896px;
     margin: 0 auto 0px;
     text-align: center;
     background-color: #c2c5aa;
@@ -59,7 +59,7 @@ a {
 #todos-box {
     display: flex;
     flex-direction: row;
-    width: 898px;
+    width: 896px;
     margin: 0 auto;
     background-color: #c2c5aa;
     border-left: 1px solid darkgray;
@@ -67,7 +67,7 @@ a {
 }
 
 .todo {
-    width: 299px;
+    width: 297px;
     text-align: center;
 }
 
@@ -100,15 +100,24 @@ a {
 
     background-color: #a4ac86;
     border-bottom: 5px solid #656d4a;
-    border-radius: 10px;
+    border-radius: 5px;
 }
 
 .img-business {
     width: 300px;
-    padding: 20px 10px 20px 20px;
+    /* height: 222px; */
+    margin: 20px 10px 20px 20px;
+    background-image: url("images/640px-Aldrin_Apollo_11_head.jpg");
+    background-size: cover;
+}
+
+.img-business:hover {
+    background-image: url("https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHhsZXZxeGRnMG96Ym56Y2RnZWYwZmcyMDVjYjd3MmtpNzhlejg3aCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/Nw8z2olm0nGHC/giphy.gif");
+    /* background-image: url("images/640px-Aldrin_Apollo_11_head.jpg"); */
 }
 
 .flex-stacked {
+    width: 300px;
     text-align: center;
     /* display: block; */
     padding: 20px 20px 20px 10px;
