@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Solo - Basketball Scoreboard</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='index.css'>
+</head>
+
+<body>
+    <div class="container">
+        <div class="score-box">
+            <h3>HOME</h3>
+            <button id="score-h" class="btn-score">0</button>
+            <button onclick="changeScore('H', 1)" id="score-h-1" class="btn-op">+ 1</button>
+            <button onclick="changeScore('H', 2)" id="score-h-2" class="btn-op">+2</button>
+            <button onclick="changeScore('H', 3)" id="score-h-3" class="btn-op">+3</button>
+        </div>
+        <button onclick="resetScores()">Reset</button>
+        <div class="score-box">
+            <h3>GUEST</h3>
+            <button id="score-g" class="btn-score">0</button>
+            <button onclick="changeScore('G', 1)" id="score-g-1" class="btn-op">+ 1</button>
+            <button onclick="changeScore('G', 2)" id="score-g-2" class="btn-op">+2</button>
+            <button onclick="changeScore('G', 3)" id="score-g-3" class="btn-op">+3</button>
+        </div>
+    </div>
+
+</body>
+<script src='index.js'></script>
+
+</html>

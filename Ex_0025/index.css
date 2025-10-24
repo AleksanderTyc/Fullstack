@@ -1,0 +1,61 @@
+body {
+    font-family: 'Courier New', Courier, monospace;
+    color: white;
+    margin: 0;
+}
+
+h3 {
+    text-align: center;
+}
+
+/*
+https://www.1001fonts.com/digital-7-font.html
+*/
+@font-face {
+    font-family: TraditionalCalculator;
+    src: url("fonts/digital-7.regular.ttf");
+}
+
+
+.container {
+    display: flex;
+    justify-content: space-around;
+    width: 50%;
+    margin: 100px auto;
+
+    padding: 10px 0 50px 0;
+    background-color: #003366;
+    border-color: pink;
+    border-width: 5px;
+    border-style: solid;
+    border-radius: 5px;
+}
+
+.btn-score {
+    display: block;
+    margin-bottom: 20px;
+
+    width: 155px;
+    height: 100px;
+    background-color: black;
+    color: #ff9999;
+    border: none;
+    border-radius: 2px;
+
+    font-family: "TraditionalCalculator", sans-serif;
+    font-size: 60px;
+}
+
+.btn-op {
+    width: 45px;
+    height: 40px;
+    background-color: #003366;
+    color: white;
+    border-color: white;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 2px;
+
+    font-family: "TraditionalCalculator", sans-serif;
+    font-size: large;
+}
