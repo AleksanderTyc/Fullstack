@@ -14,3 +14,16 @@ h1 {
 #message-el {
     font-style: italic;
 }
+
+.actn-btn {
+    width: 150px;
+    background-color: goldenrod;
+    color: #016f32;
+    font-weight: bold;
+
+    border: none;
+    border-radius: 3px;
+
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
