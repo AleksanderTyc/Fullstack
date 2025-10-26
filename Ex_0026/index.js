@@ -3,6 +3,12 @@ let sum = 0;
 let hasBlackjack = false;
 let isAlive = true;
 
+let player = {
+    name: "Per",
+    chips: 14
+}
+document.getElementById("player-el").textContent = player.name + ": " + player.chips;
+
 const getBlackjackCard = () => {
     const randomCard = Math.floor(Math.random() * 13) + 2;
     return randomCard > 11 ? 10 : randomCard;
@@ -15,23 +21,27 @@ const startGame = () => {
     card = 0;
     sum = 0;
 
-    // card = Math.floor(Math.random() * 10) + 2; // 2-11
-    card = getBlackjackCard();
-    sum += card;
-    presentCard();
-    // card = Math.floor(Math.random() * 10) + 2; // 2-11
-    card = getBlackjackCard();
-    sum += card;
-    presentCard();
-
-
-    // let firstCard = Math.floor( Math.random() *10 ) +2; // 2-11
-    // let secondCard = Math.floor( Math.random() *10 ) +2; // 2-11
-
     hasBlackjack = false;
-    isAlive = true;
+    if (player.chips > 0) {
+        isAlive = true;
+        player.chips -= 1;
+        renderGame();
+    } else {
+        isAlive = false;
+        document.getElementById("message-el").textContent = "No chips left!";
+    }
 
-    renderGame();
+    if( isAlive === false ) { return; }
+    
+    // card = Math.floor(Math.random() * 10) + 2; // 2-11
+    card = getBlackjackCard();
+    sum += card;
+    presentCard();
+    // card = Math.floor(Math.random() * 10) + 2; // 2-11
+    card = getBlackjackCard();
+    sum += card;
+    presentCard();
+
 }
 
 const renderGame = () => {
@@ -47,12 +57,18 @@ const renderGame = () => {
         messageEl = "You're out of the game!";
     }
 
+    if (hasBlackjack) {
+            player.chips += 2;
+    }
+
     console.log(`Sum: ${sum} ${messageEl} hasBlackjack: ${hasBlackjack} isAlive: ${isAlive}`);
     document.getElementById("message-el").textContent = messageEl;
+    document.getElementById("player-el").textContent = player.name + ": " + player.chips;
 }
 
 const newCard = () => {
     console.log("newCard clicked");
+    if ((isAlive === false) || (hasBlackjack === true)) { return; }
     // card = Math.floor(Math.random() * 10) + 2; // 2-11
     card = getBlackjackCard();
     sum += card;
@@ -66,3 +82,23 @@ function presentCard() {
     document.getElementById("sum-el").textContent = "Sum: ".concat(sum);
 }
 // renderGame();
+
+/* Side - task */
+/*
+function airbnbCastle () {
+    const myListing = {
+        myBoolean: true,
+        myString: "My Castle",
+        myNumber: "17",
+        myArray: ["May", "August", "December"]
+    }
+    console.log( `Castle Logging: myBoolean is ${myListing.myBoolean}`);
+    console.log( `Castle Logging: myString is ${myListing.myString}`);
+    console.log( `Castle Logging: myNumber is ${myListing.myNumber}`);
+    console.log( `Castle Logging: myArray is ${myListing.myArray}`);
+}
+
+console.log( "Calling airbnbCastle");
+airbnbCastle();
+console.log( "Calling airbnbCastle - end");
+*/
