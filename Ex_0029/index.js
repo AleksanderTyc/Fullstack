@@ -9,7 +9,13 @@ function saveInput() {
     console.log(`inputEl value is ${inputEl.value}`);
     if (inputEl.value.length > 0) {
         myLeads.push(inputEl.value);
-        ulEl.innerHTML += `<li>${inputEl.value}</li>`;
+        // Easier to see what is going on
+        // ulEl.innerHTML += `<li>${inputEl.value}</li>`;
+        // Same thing, but using document createElement and append methods
+        const listItem = document.createElement("li");
+        listItem.textContent = inputEl.value;
+        ulEl.append(listItem);
+        inputEl.value = "";
     }
     console.log(`myLeads line by line:`);
     myLeads.map((elem, indx) => {
