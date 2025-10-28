@@ -19,3 +19,20 @@ function saveInput() {
 }
 
 document.getElementById("input-btn").addEventListener("click", saveInput);
+
+/* Side problem */
+/*
+const containerEl = document.getElementById("container-el");
+function buyFunc () {
+    console.log( `Buy clicked, container inner HTML before: ${containerEl.innerHTML}`);
+    containerEl.innerHTML += "<p>Thank you for buying!</p>";
+    // console.log( "<p>Thank you for buying!</p>");
+    console.log( `Buy clicked, container inner HTML after: ${containerEl.innerHTML}`);
+};
+// Original syntax - each time Buy is clicked, we get a new paragraph.
+containerEl.innerHTML = "<button id='buy-btn' onclick='buyFunc()'>Buy!</button>";
+// My syntax - when Buy is clicked, event listener is detached from button, but I don't know why.
+containerEl.innerHTML = "<button id='buy-btn'>Buy!</button>"; //
+const buyBtn = document.getElementById("buy-btn");
+buyBtn.addEventListener("click", buyFunc);
+*/
