@@ -11,10 +11,11 @@ function saveInput() {
         myLeads.push(inputEl.value);
         // Easier to see what is going on
         // ulEl.innerHTML += `<li>${inputEl.value}</li>`;
+        ulEl.innerHTML += `<li><a target="_blank" href="https://${inputEl.value}">${inputEl.value}</a></li>`;
         // Same thing, but using document createElement and append methods
-        const listItem = document.createElement("li");
-        listItem.textContent = inputEl.value;
-        ulEl.append(listItem);
+        // const listItem = document.createElement("li");
+        // listItem.textContent = inputEl.value;
+        // ulEl.append(listItem);
         inputEl.value = "";
     }
     console.log(`myLeads line by line:`);
