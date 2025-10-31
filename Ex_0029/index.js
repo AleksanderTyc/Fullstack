@@ -1,6 +1,20 @@
 // chrome://extensions/
 
-let myLeads = [];
+/*
+localStorage.length
+localStorage.key(0,...,length)
+localStorage.getItem(key)
+localStorage.removeItem(key)
+localStorage.clear()
+localStorage.setItem(key,value)
+*/
+
+let myLeads = JSON.parse(localStorage.getItem("myLeads"));
+console.log(`${typeof myLeads}, ${myLeads}`);
+if (myLeads === null) {
+    myLeads = [];
+}
+
 const inputEl = document.getElementById("input-el");
 
 const ulEl = document.getElementById("ul-el");
@@ -11,27 +25,53 @@ function saveInput() {
     console.log(`inputEl value is ${inputEl.value}`);
     if (inputEl.value.length > 0) {
         myLeads.push(inputEl.value);
-        // Easier to see what is going on
-        // ulEl.innerHTML += `<li>${inputEl.value}</li>`;
-        ulEl.innerHTML += `
-            <li>
-                <a target="_blank" href="https://${inputEl.value}">${inputEl.value}</a>
-            </li>
-        `;
-        // Same thing, but using document createElement and append methods
-        // const listItem = document.createElement("li");
-        // listItem.textContent = inputEl.value;
-        // ulEl.append(listItem);
+        // myLeads = inputEl.value;
         inputEl.value = "";
     }
-    console.log(`myLeads line by line:`);
+    renderMyLeads();
+}
+
+function saveLeadsToStorage() {
+    localStorage.setItem("myLeads", JSON.stringify(myLeads));
+    console.log(`saveLeadsToStorage clicked, new length is ${localStorage.length}`);
+}
+
+function renderMyLeads() {
+    // Easier to see what is going on
+    // ulEl.innerHTML += `<li>${inputEl.value}</li>`;
+    // ulEl.innerHTML += `
+    //     <li>
+    //         <a target="_blank" href="https://${inputEl.value}">${inputEl.value}</a>
+    //     </li>
+    // `;
+    // Same thing, but using document createElement and append methods
+    // const listItem = document.createElement("li");
+    // listItem.textContent = inputEl.value;
+    // ulEl.append(listItem);
+
+
+    ulEl.innerHTML = "";
     myLeads.map((elem, indx) => {
         console.log(`${indx}. ${elem}`);
+        const listItem = document.createElement("li");
+        listItem.innerHTML = `<a target="_blank" href="https://${elem}">${elem}</a>`;
+        ulEl.append(listItem);
     });
-    console.log(`myLeads line by line end`);
+    // const listItem = document.createElement("li");
+    // listItem.innerHTML = `<a target="_blank" href="https://${myLeads}">${myLeads}</a>`;
+    // ulEl.append(listItem);
+}
+
+function clearMyLeads() {
+    localStorage.removeItem("myLeads");
+    myLeads = [];
+    renderMyLeads();
 }
 
 document.getElementById("input-btn").addEventListener("click", saveInput);
+document.getElementById("save-btn").addEventListener("click", saveLeadsToStorage);
+document.getElementById("clear-btn").addEventListener("click", clearMyLeads);
+renderMyLeads();
 
 /* Side problem */
 /*
