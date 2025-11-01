@@ -40,3 +40,11 @@ largeCountriesB.shift();
 console.log( `largeCountriesB remove Tuvalu: ${largeCountriesB}`);
 largeCountriesB.unshift("China");
 console.log( `largeCountriesB add China: ${largeCountriesB}`);
+
+/* Generate Sentence */
+function generateSentence(desc, arr) {
+    return `The ${arr.length} ${desc} ${arr.length > 1 ? "are" : "is"} ${arr}`;
+}
+console.log(generateSentence("largest countries", ["China", "India", "USA"]));
+console.log(generateSentence("best fruits", ["Apples", "Bananas"]));
+console.log(generateSentence("best fruit", ["Bananas"]));
