@@ -70,7 +70,7 @@ function clearMyLeads() {
 
 document.getElementById("input-btn").addEventListener("click", saveInput);
 document.getElementById("save-btn").addEventListener("click", saveLeadsToStorage);
-document.getElementById("clear-btn").addEventListener("click", clearMyLeads);
+document.getElementById("clear-btn").addEventListener("dblclick", clearMyLeads);
 renderMyLeads();
 
 /* Side problem */

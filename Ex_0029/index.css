@@ -25,8 +25,13 @@ button {
     color: white;
     font-weight: bold;
     padding: 10px 20px;
-    border: none;
+    border: 1px solid #5f9341;
     margin-top: 10px;
+}
+
+#clear-btn {
+    color: #5f9341;
+    background-color: white;
 }
 
 ul {
