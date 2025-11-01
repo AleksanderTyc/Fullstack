@@ -14,32 +14,32 @@ console.log(logData(personObj));
 
 /* Discount */
 const detDiscount = (age) => {
-    if( age < 6 ) return "free";
-    if( age < 18 ) return "child discount";
-    if( age < 27 ) return "student discount";
-    if( age < 67 ) return "full price";
+    if (age < 6) return "free";
+    if (age < 18) return "child discount";
+    if (age < 27) return "student discount";
+    if (age < 67) return "full price";
     return "senior citizen discount";
 }
 
-for (let index = 5; index < 75; index+=5){
-    console.log( `Age is ${index}, discount: ${detDiscount(index)}`);
+for (let index = 5; index < 75; index += 5) {
+    console.log(`Age is ${index}, discount: ${detDiscount(index)}`);
 }
 
 /* Large countries */
 const largeCountries = ["China", "India", "USA", "Indonesia", "Pakistan"];
-largeCountries.map((elem,index) => {console.log(`- ${index}: ${elem}`);});
+largeCountries.map((elem, index) => { console.log(`- ${index}: ${elem}`); });
 
 /* Large countries - broken */
 let largeCountriesB = ["Tuvalu", "India", "USA", "Indonesia", "Monaco"];
-console.log( `largeCountriesB start: ${largeCountriesB}`);
+console.log(`largeCountriesB start: ${largeCountriesB}`);
 largeCountriesB.pop();
-console.log( `largeCountriesB remove Monaco: ${largeCountriesB}`);
+console.log(`largeCountriesB remove Monaco: ${largeCountriesB}`);
 largeCountriesB.push("Pakistan")
-console.log( `largeCountriesB add Pakistan: ${largeCountriesB}`);
+console.log(`largeCountriesB add Pakistan: ${largeCountriesB}`);
 largeCountriesB.shift();
-console.log( `largeCountriesB remove Tuvalu: ${largeCountriesB}`);
+console.log(`largeCountriesB remove Tuvalu: ${largeCountriesB}`);
 largeCountriesB.unshift("China");
-console.log( `largeCountriesB add China: ${largeCountriesB}`);
+console.log(`largeCountriesB add China: ${largeCountriesB}`);
 
 /* Generate Sentence */
 function generateSentence(desc, arr) {
@@ -48,3 +48,11 @@ function generateSentence(desc, arr) {
 console.log(generateSentence("largest countries", ["China", "India", "USA"]));
 console.log(generateSentence("best fruits", ["Apples", "Bananas"]));
 console.log(generateSentence("best fruit", ["Bananas"]));
+
+/* Rounding number */
+let totalPrice = 420.69235;
+let roundedPrice = `Buy EUR ${totalPrice.toFixed(2)}`;
+console.log(`${totalPrice}, ${roundedPrice}`);
+totalPrice = 420.69635;
+roundedPrice = `Buy EUR ${totalPrice.toFixed(2)}`;
+console.log(`${totalPrice}, ${roundedPrice}`);
