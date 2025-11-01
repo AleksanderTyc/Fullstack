@@ -62,6 +62,17 @@ function renderMyLeads() {
     // ulEl.append(listItem);
 }
 
+function saveTab() {
+    // const tabs = [{ url: "https://www.linkedin.com/in/aleksander-tyc-2b83b6199/" }];
+    chrome.tabs.query(
+        { active: true, currentWindow: true },
+        function (tabs) {
+            myLeads.push(tabs[0]["url"]);
+            renderMyLeads();
+        }
+    );
+}
+
 function clearMyLeads() {
     localStorage.removeItem("myLeads");
     myLeads = [];
@@ -70,6 +81,7 @@ function clearMyLeads() {
 
 document.getElementById("input-btn").addEventListener("click", saveInput);
 document.getElementById("save-btn").addEventListener("click", saveLeadsToStorage);
+document.getElementById("tab-btn").addEventListener("click", saveTab);
 document.getElementById("clear-btn").addEventListener("dblclick", clearMyLeads);
 renderMyLeads();
 
