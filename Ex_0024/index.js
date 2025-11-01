@@ -19,3 +19,16 @@ const multiply = () => {
 const divide = () => {
     document.getElementById("sum-el").textContent = "Sum:" + " " + (num1 / num2);
 }
+
+/* Render Images */
+const images = [
+    "images/hip1.jpg",
+    "images/hip2.jpg",
+    "images/hip3.jpg",
+    "images/hip4.jpg"
+];
+
+const pictContainer = document.getElementById("pict-container");
+images.forEach((elem) => {
+    pictContainer.innerHTML += `<img class="team-img" src="${elem}">`;
+});
