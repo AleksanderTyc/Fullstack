@@ -1,0 +1,39 @@
+body {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    background-color: black;
+    text-align: center;
+}
+
+button {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+p {
+    color: lightgray;
+}
+
+#overall {
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+    border: 8px solid white;
+    border-radius: 20px;
+}
+
+#hero {
+    background-color: #eb5e28;
+    color: #fffcf2;
+}
+
+#convert-box {
+    background-color: gray;
+}
+
+.convert-individual {
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: lightgray;
+}
