@@ -56,3 +56,31 @@ console.log(`${totalPrice}, ${roundedPrice}`);
 totalPrice = 420.69635;
 roundedPrice = `Buy EUR ${totalPrice.toFixed(2)}`;
 console.log(`${totalPrice}, ${roundedPrice}`);
+
+/* Red Light Green Light */
+console.log(String.fromCharCode(65)); // A
+console.log('🔴');
+console.log(String.fromCodePoint(0x1F534)); // Red Circle 🔴 U+1F534
+console.log(String.fromCodePoint(0x1F7E2)); // Green Circle 🟢 U+1F7E2
+
+function displayTrafficLight(light) {
+    console.log(light);
+}
+
+setTimeout(() => { displayTrafficLight('🟢'); }, 3000);
+displayTrafficLight('🔴');
+
+function logAnswer(answer, points) {
+    console.log(`
+        The answer is ${answer} of course!
+        If you got that right, give yourself ${points} points.
+        `);
+}
+// setTimeout(logAnswer, 3000, "Peru", 10 );
+setTimeout(() => { logAnswer("Peru", 10); }, 3000); // Same thing, no extra arguments passed to setTimeout.
+console.log("What is the capital of Peru?");
+
+// How to cancel an existing, unexpired (unresolved?) Timeout?
+const PeruTimeout = setTimeout(() => { logAnswer("Peru", 10); }, 4000); // Will show 1 second after the above, unless cancelled.
+// clearTimeout(PeruTimeout);
+
