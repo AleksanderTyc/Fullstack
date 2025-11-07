@@ -84,3 +84,23 @@ console.log("What is the capital of Peru?");
 const PeruTimeout = setTimeout(() => { logAnswer("Peru", 10); }, 4000); // Will show 1 second after the above, unless cancelled.
 // clearTimeout(PeruTimeout);
 
+/* Date */
+const dateSnapshot = new Date();
+console.log(dateSnapshot); // weird colour
+console.log(dateSnapshot.toString());
+console.log(dateSnapshot.getFullYear()); // weird colour
+console.log(dateSnapshot.getFullYear().toString()); // standard colour
+
+/* Error */
+function checkUsername(uName) {
+    if (uName) {
+        console.log(uName);
+    } else {
+        // throw new Error('No user name provided');
+        console.log(new Error('No user name provided'));
+    }
+}
+
+checkUsername('funnyMongrel');
+checkUsername();
+checkUsername('anaStasia');
