@@ -111,3 +111,10 @@ checkUsername('anaStasia');
 console.log( beforeInit ); // not defined vs cannot access before initialisation
 let beforeInit = 'Here I am'; // cannot access before initialisation
 // var beforeInit = 'Here I am'; // undefined
+
+
+/* Performance */
+const start = performance.now();
+// some shit taking long time to run
+const end = performance.now();
+console.log( `Execution time ${end-start} milliseconds`);
