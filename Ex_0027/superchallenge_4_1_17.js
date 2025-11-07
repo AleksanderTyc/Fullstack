@@ -46,3 +46,12 @@ priceIconElement.alt = 'Price direction icon' // AT: This could be much better
 stockDisplayPriceIcon.innerHTML = '';
 stockDisplayPriceIcon.appendChild( priceIconElement );
 */
+
+/* Clearing setInterval after specific time:
+// after 5 seconds stop
+setTimeout(() => { clearInterval(timerId); alert('stop'); }, 5000);
+
+Very good article about setTimeout and setInterval:
+https://javascript.info/settimeout-setinterval
+It explains setInterval vs nested setTimeout - time between calls vs time between executions.
+*/
