@@ -67,7 +67,7 @@ function displayTrafficLight(light) {
     console.log(light);
 }
 
-setTimeout(() => { displayTrafficLight('🟢'); }, 3000);
+// setTimeout(() => { displayTrafficLight('🟢'); }, 3000);
 displayTrafficLight('🔴');
 
 function logAnswer(answer, points) {
@@ -77,12 +77,13 @@ function logAnswer(answer, points) {
         `);
 }
 // setTimeout(logAnswer, 3000, "Peru", 10 );
-setTimeout(() => { logAnswer("Peru", 10); }, 3000); // Same thing, no extra arguments passed to setTimeout.
+// setTimeout(() => { logAnswer("Peru", 10); }, 3000); // Same thing, no extra arguments passed to setTimeout.
 console.log("What is the capital of Peru?");
+logAnswer("Peru", 10);
 
 // How to cancel an existing, unexpired (unresolved?) Timeout?
 const PeruTimeout = setTimeout(() => { logAnswer("Peru", 10); }, 4000); // Will show 1 second after the above, unless cancelled.
-// clearTimeout(PeruTimeout);
+clearTimeout(PeruTimeout);
 
 /* Date */
 const dateSnapshot = new Date();
@@ -104,3 +105,9 @@ function checkUsername(uName) {
 checkUsername('funnyMongrel');
 checkUsername();
 checkUsername('anaStasia');
+
+
+/* Hoisting */
+console.log( beforeInit ); // not defined vs cannot access before initialisation
+let beforeInit = 'Here I am'; // cannot access before initialisation
+// var beforeInit = 'Here I am'; // undefined
