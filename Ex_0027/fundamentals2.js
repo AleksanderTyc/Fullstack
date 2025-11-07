@@ -54,3 +54,30 @@ function calculateTotalDistance(destArray) {
 // console.log( `distanceTravelledKm: ${calculateTotalDistance(distanceTravelledKm)}`);
 console.log(`interDestsArr: ${calculateTotalDistance(interDestsArr)}`);
 console.log(`localDestsArr: ${calculateTotalDistance(localDestsArr)}`);
+
+
+/* Challenge - thank you */
+function getLabelsHTML(text, sender, ...recipients) {
+    let labelHTML = '';
+    recipients.forEach((recipient) => labelHTML +=
+        `<div class="label-card">
+    <p>Dear ${recipient.name} </p>
+    <p>${text}</p>
+    <p>Best wishes,</p>
+    <p>${sender}</p>
+</div>
+`);
+    return labelHTML;
+}
+console.log(getLabelsHTML(
+    'Thank you for your hard work',
+    'Tom',
+    { name: 'Sally' },
+    { name: 'Mike' },
+    { name: 'Rob' },
+    { name: 'Chris' }
+));
+// Alternatively:
+// return recipients.map(...).join('');
+// We convert each recipient into the block of HTML, map returns an array.
+// Then we use join with empty joining string to convert the array to a single string, which is returned.
