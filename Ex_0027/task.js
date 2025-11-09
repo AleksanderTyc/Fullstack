@@ -108,7 +108,7 @@ checkUsername('anaStasia');
 
 
 /* Hoisting */
-console.log( beforeInit ); // not defined vs cannot access before initialisation
+// console.log( beforeInit ); // not defined vs cannot access before initialisation
 let beforeInit = 'Here I am'; // cannot access before initialisation
 // var beforeInit = 'Here I am'; // undefined
 
@@ -116,5 +116,14 @@ let beforeInit = 'Here I am'; // cannot access before initialisation
 /* Performance */
 const start = performance.now();
 // some shit taking long time to run
+const body = JSON.stringify({
+    title: 'Holiday nightmares',
+    body: 'When I was kidnapped in Scotland...',
+    userId: 10142
+});
+const srcOrg = JSON.parse(body);
+// const srcOrg = body.json(); // does not work
+console.log(`body: ${typeof body}, ${body}`);
+console.log(`srcOrg: ${typeof srcOrg}, ${srcOrg}`);
 const end = performance.now();
 console.log( `Execution time ${end-start} milliseconds`);

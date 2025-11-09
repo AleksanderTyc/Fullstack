@@ -16,12 +16,13 @@ fetch('https://bored-api.appbrewery.com/activity')
     .then((data, reject) => console.log(`data ${data}, reject ${reject}`));
 */
 
+/*
 // fetch("https://dogs.ceo/api/breeds/image/random") // wrong address
 // fetch("https://dog.ceo/api/breeds/image/randomm") // wrong end point
 fetch("https://dog.ceo/api/breeds/image/random")
     .then(response => {
-        if( !response.ok ) {
-            throw new Error( `* ERR * response status is ${response.status}, ${response.statusText}`);
+        if (!response.ok) {
+            throw new Error(`* ERR * response status is ${response.status}, ${response.statusText}`);
         }
         return response.json();
     })
@@ -33,4 +34,49 @@ fetch("https://dog.ceo/api/breeds/image/random")
     })
     .finally(() => console.log("All done"))
     ;
+*/
 
+/*
+fetch("https://jsonplaceholder.typicode.com/posts", { method: 'GET' }) // GET is default
+    .then(response => response.json())
+    .then(data => console.log(data))
+    ;
+
+fetch("https://jsonplaceholder.typicode.com/posts", { method: 'GET' }) // GET is default
+    .then(response => response.json())
+    .then(data => {
+        const resData = data.filter((elem) => elem.id === 99);
+        console.log(resData);
+    })
+    ;
+
+fetch("https://jsonplaceholder.typicode.com/posts", { method: 'GET' }) // GET is default
+    .then(response => console.log(response))
+    ;
+
+*/
+// POST and PUT requests require body parameter
+fetch(
+    "https://jsonplaceholder.typicode.com/posts",
+    {
+        method: 'POST',
+        headers: {
+            "Content-Type": 'application/json'
+        },
+        body: JSON.stringify({
+            title: 'Holiday nightmares',
+            body: 'When I was kidnapped in Scotland...',
+            userId: 10142
+        })
+    }
+)
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`* ERR * POST to placeholder failed, status is ${response.status}, ${response.statusText}`);
+        }
+        return response.json();
+    })
+    .then(data => console.log(data))
+    .catch(err => console.log(`*** ERROR *** While processing promise * ${err}`))
+    .finally(() => console.log("fetch POST complete"))
+    ;
