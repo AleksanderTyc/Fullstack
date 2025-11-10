@@ -55,7 +55,11 @@ fetch("https://jsonplaceholder.typicode.com/posts", { method: 'GET' }) // GET is
     ;
 
 */
+
+/*
 // POST and PUT requests require body parameter
+// headers is required to ensure that the server correctly processes the POST request.
+// Then instead of just responding with id:101, it will send back the entire record.
 fetch(
     "https://jsonplaceholder.typicode.com/posts",
     {
@@ -80,3 +84,22 @@ fetch(
     .catch(err => console.log(`*** ERROR *** While processing promise * ${err}`))
     .finally(() => console.log("fetch POST complete"))
     ;
+*/
+
+/*
+const promise = new Promise(
+    (resolve, reject) => {
+        const success = Math.random() < 0.5;
+        if (success) {
+            resolve('Operation successful');
+        } else {
+            reject('Operation failed'); // Note that this throws an error, so it requires `catch` to be processed.
+        }
+    }
+);
+
+promise
+    .then( response => console.log(response))
+    .catch(err => console.log(`* ERR * ${err}`))
+    ;
+*/
