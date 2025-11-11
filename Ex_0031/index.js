@@ -55,7 +55,7 @@ openai.chat.completions.create({
         },
         {
             "role": "user",
-            "content": "Who invented the television?"
+            "content": "Please explain quantum computing to a non scientific person who knows little about computers."
         }
     ]
 })
