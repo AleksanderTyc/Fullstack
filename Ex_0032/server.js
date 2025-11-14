@@ -25,43 +25,47 @@ const PORT = 8000; // Which port are we listening on
 */
 
 import { getDataFromDB } from './dbase/db.js';
+import { sendJSONResponse } from './utils/sendJSONResponse.js';
 
 const server = http.createServer(async (req, res) => {
     const dateRes = new Date();
     console.log(`${dateRes} * New request serviced`, req.url);
     if (req.method === 'GET') {
-        res.setHeader('Content-Type', 'application/json');
+        // res.setHeader('Content-Type', 'application/json');
         const pathComponents = req.url.split('/');
+        const data = await getDataFromDB();
         if (req.url === '/api') {
-            res.statusCode = 200;
-            const data = await getDataFromDB();
+            // res.statusCode = 200;
             console.log(`Request being serviced, Content-Type header is ${res.getHeader('Content-Type')}`);
-            res.write(JSON.stringify(data[0]));
+            // res.write(JSON.stringify(data[0]));
+            sendJSONResponse(res, 200, data[0]);
         } else if (req.url.slice(0, 14) === '/api/continent') {
-            if( pathComponents.length === 4 ) {
-                res.statusCode = 200;
-                const data = await getDataFromDB();
+            if (pathComponents.length === 4) {
+                // res.statusCode = 200;
+                // const data = await getDataFromDB();
                 console.log(`Request being serviced`);
-                res.write(JSON.stringify(data.filter(elem => elem.continent.toLowerCase() === pathComponents[3].toLowerCase())));
+                // res.write(JSON.stringify(data.filter(elem => elem.continent.toLowerCase() === pathComponents[3].toLowerCase())));
+                sendJSONResponse(res, 200, JSON.stringify(data.filter(elem => elem.continent.toLowerCase() === pathComponents[3].toLowerCase())));
             } else {
-                res.statusCode = 404;
-                res.write(JSON.stringify({
-                    error: 'not found',
-                    message: 'The request route does not exist - continent'
-                }));
+                // res.statusCode = 404;
+                // res.write(JSON.stringify({
+                //     error: 'not found',
+                //     message: 'The request route does not exist - continent'
+                // }));
+                sendJSONResponse(res, 404, { error: 'not found', message: 'The request route does not exist - continent' });
             }
             console.log(pathComponents, 'Search for', pathComponents[pathComponents.length - 1]);
-
         } else {
             console.log('DIAG *', req.url.slice(0, 14));
             console.log('Default * branch');
             console.log('Default * method', req.method, 'url', req.url); // method GET url /favicon.ico
             console.log('Default * branch end');
-            res.statusCode = 404;
-            res.write(JSON.stringify({
-                error: 'not found',
-                message: 'The request route does not exist - GEN'
-            }));
+            // res.statusCode = 404;
+            // res.write(JSON.stringify({
+            //     error: 'not found',
+            //     message: 'The request route does not exist - GEN'
+            // }));
+            sendJSONResponse(res, 404, { error: 'not found', message: 'The request route does not exist - GEN' });
         }
     } else {
         console.log('The other branch');
@@ -173,6 +177,54 @@ const server = http.createServer(async (req, res) => {
                     message: 'The request route does not exist'
                 }));
                         break;
+        }
+    } else {
+        console.log('The other branch');
+        console.log('method', req.method, 'url', req.url); // method GET url /favicon.ico
+        console.log('The other branch end');
+    }
+    res.end();
+    console.log(`${dateRes} * New request has been serviced, statusCode is `, res.statusCode);
+});
+*/
+
+/*
+// endpoints served from a simulated database
+const server = http.createServer(async (req, res) => {
+    const dateRes = new Date();
+    console.log(`${dateRes} * New request serviced`, req.url);
+    if (req.method === 'GET') {
+        res.setHeader('Content-Type', 'application/json');
+        const pathComponents = req.url.split('/');
+        if (req.url === '/api') {
+            res.statusCode = 200;
+            const data = await getDataFromDB();
+            console.log(`Request being serviced, Content-Type header is ${res.getHeader('Content-Type')}`);
+            res.write(JSON.stringify(data[0]));
+        } else if (req.url.slice(0, 14) === '/api/continent') {
+            if( pathComponents.length === 4 ) {
+                res.statusCode = 200;
+                const data = await getDataFromDB();
+                console.log(`Request being serviced`);
+                res.write(JSON.stringify(data.filter(elem => elem.continent.toLowerCase() === pathComponents[3].toLowerCase())));
+            } else {
+                res.statusCode = 404;
+                res.write(JSON.stringify({
+                    error: 'not found',
+                    message: 'The request route does not exist - continent'
+                }));
+            }
+            console.log(pathComponents, 'Search for', pathComponents[pathComponents.length - 1]);
+        } else {
+            console.log('DIAG *', req.url.slice(0, 14));
+            console.log('Default * branch');
+            console.log('Default * method', req.method, 'url', req.url); // method GET url /favicon.ico
+            console.log('Default * branch end');
+            res.statusCode = 404;
+            res.write(JSON.stringify({
+                error: 'not found',
+                message: 'The request route does not exist - GEN'
+            }));
         }
     } else {
         console.log('The other branch');
