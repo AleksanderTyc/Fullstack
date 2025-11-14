@@ -26,24 +26,20 @@ const PORT = 8000; // Which port are we listening on
 
 import { getDataFromDB } from './dbase/db.js';
 import { sendJSONResponse } from './utils/sendJSONResponse.js';
-import { getDataByPathParams } from './utils/getDataByPathParams.js';
+import { getDataByPathParams, getDataByQueryParams } from './utils/getDataByPathParams.js';
 
 const server = http.createServer(async (req, res) => {
     const dateRes = new Date();
     console.log(`${dateRes} * New request serviced`, req.url);
     if (req.method === 'GET') {
-        const pathComponents = req.url.split('/');
         const data = await getDataFromDB();
-        if (req.url === '/api') {
-            sendJSONResponse(res, 200, data[0]);
-        } else if ((req.url.startsWith('/api/continent/')) || (req.url.startsWith('/api/country/'))) {
-            if (pathComponents.length === 4) {
-                const filteredData = getDataByPathParams(data, pathComponents[2],pathComponents[3]);
-                sendJSONResponse(res, 200, JSON.stringify(filteredData));
-            } else {
-                sendJSONResponse(res, 404, { error: 'not found', message: 'The request route does not exist - continent or country' });
-            }
-            console.log(pathComponents, 'Search for', pathComponents[pathComponents.length - 1]);
+        const urlObj = new URL(req.url, `http://${req.headers.host}`);
+        const pathComponents = urlObj.pathname.split('/');
+        const queryObj = Object.fromEntries(urlObj.searchParams);
+        console.log(`${dateRes} * urlObj.pathname ${urlObj.pathname}, qurey parameters is`, queryObj, 'pathComponents is', pathComponents);
+        if (urlObj.pathname === '/api') {
+            const filteredData = getDataByQueryParams(data, queryObj); // vulnerable: parameters beyond the scope
+            sendJSONResponse(res, 200, filteredData);
         } else {
             console.log('DIAG *', req.url.slice(0, 14));
             console.log('Default * branch');
@@ -313,6 +309,75 @@ const server = http.createServer(async (req, res) => {
     } else {
         console.log('The other branch');
         console.log('method', req.method, 'url', req.url); // method GET url /favicon.ico
+        console.log('The other branch end');
+    }
+    res.end();
+    console.log(`${dateRes} * New request has been serviced, statusCode is `, res.statusCode);
+});
+*/
+
+/*
+// Search by endpoint
+const server = http.createServer(async (req, res) => {
+    const dateRes = new Date();
+    console.log(`${dateRes} * New request serviced`, req.url);
+    if (req.method === 'GET') {
+        const data = await getDataFromDB();
+        const urlObj = new URL(req.url, `http://${req.headers.host}`);
+        const pathComponents = urlObj.pathname.split('/');
+        const queryObj = Object.fromEntries(urlObj.searchParams);
+        console.log(`${dateRes} * urlObj.pathname ${urlObj.pathname}, qurey parameters is`, queryObj, 'pathComponents is', pathComponents);
+        if (urlObj.pathname === '/api') {
+            sendJSONResponse(res, 200, data[0]);
+        } else if ((urlObj.pathname.startsWith('/api/continent/')) || (urlObj.pathname.startsWith('/api/country/'))) {
+            if (pathComponents.length === 4) {
+                const filteredData = getDataByPathParams(data, pathComponents[2], pathComponents[3]);
+                sendJSONResponse(res, 200, JSON.stringify(filteredData));
+            } else {
+                sendJSONResponse(res, 404, { error: 'not found', message: 'The request route does not exist - continent or country' });
+            }
+            console.log(pathComponents, 'Search for', pathComponents[pathComponents.length - 1]);
+        } else {
+            console.log('DIAG *', req.url.slice(0, 14));
+            console.log('Default * branch');
+            console.log('Default * method', req.method, 'url', req.url); // method GET url /favicon.ico
+            console.log('Default * branch end');
+            sendJSONResponse(res, 404, { error: 'not found', message: 'The request route does not exist - GEN' });
+        }
+    } else {
+        console.log('The other branch');
+        console.log('method', req.method, 'url', req.url); // method not GET
+        console.log('The other branch end');
+    }
+    res.end();
+    console.log(`${dateRes} * New request has been serviced, statusCode is `, res.statusCode);
+});
+*/
+
+/*
+// Filter by query params
+const server = http.createServer(async (req, res) => {
+    const dateRes = new Date();
+    console.log(`${dateRes} * New request serviced`, req.url);
+    if (req.method === 'GET') {
+        const data = await getDataFromDB();
+        const urlObj = new URL(req.url, `http://${req.headers.host}`);
+        const pathComponents = urlObj.pathname.split('/');
+        const queryObj = Object.fromEntries(urlObj.searchParams);
+        console.log(`${dateRes} * urlObj.pathname ${urlObj.pathname}, qurey parameters is`, queryObj, 'pathComponents is', pathComponents);
+        if (urlObj.pathname === '/api') {
+            const filteredData = getDataByQueryParams(data, queryObj); // vulnerable: parameters beyond the scope
+            sendJSONResponse(res, 200, filteredData);
+        } else {
+            console.log('DIAG *', req.url.slice(0, 14));
+            console.log('Default * branch');
+            console.log('Default * method', req.method, 'url', req.url); // method GET url /favicon.ico
+            console.log('Default * branch end');
+            sendJSONResponse(res, 404, { error: 'not found', message: 'The request route does not exist - GEN' });
+        }
+    } else {
+        console.log('The other branch');
+        console.log('method', req.method, 'url', req.url); // method not GET
         console.log('The other branch end');
     }
     res.end();
