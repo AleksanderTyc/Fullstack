@@ -86,3 +86,17 @@ test( '10.1. It returns data filtered by continent - Oceania', async () => {
     assert.deepStrictEqual(result, filteredData); // deep required for comparing arrays and other objects
 });
 
+test( '10.2. It returns data filtered by numeric data', async () => {
+    const data = [{nrek: 1, wart_n: '1', wart_b: false},{nrek: 2, wart_n: '2', wart_b: true}];
+    const filteredData = data.filter(elem => elem.nrek === 1);
+    const result = getDataByQueryParams(data, { nrek: '1' });
+    assert.deepStrictEqual(result, filteredData); // deep required for comparing arrays and other objects
+});
+
+test( '10.3. It returns data filtered by boolean data', async () => {
+    const data = [{nrek: 1, wart_n: '1', wart_b: false},{nrek: 2, wart_n: '2', wart_b: true}];
+    const filteredData = data.filter(elem => elem.wart_b === true);
+    const result = getDataByQueryParams(data, { wart_b: 'True' });
+    assert.deepStrictEqual(result, filteredData); // deep required for comparing arrays and other objects
+});
+
