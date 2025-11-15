@@ -1,11 +1,19 @@
 import http from "node:http";
 
 const PORT = 8000;
-console.log('server.js import.meta', import.meta);
+// console.log('server.js import.meta', import.meta, __dirname ); // __dirname works in CommonJS only ?
 
 // import { testImport } from './public/testImport.js'; // console.log which is part of the module will execute before console.log 2 lines above
 
+// We would like to work with a file `${import.meta.dirname}/public/thisOrThat.extension`, but this is OS-specific
+// Instead we will use CWD and Path module.
+// Paths specified using the Path module are relative to CWD (and not to the file where the code resides).
+console.log('CWD', process.cwd());
+import path from 'node:path';
+
 const server = http.createServer((req, res) => {
+    const pathToResource = path.join(import.meta.dirname, 'public', 'index.html');
+    console.log('pathToResource', pathToResource);
     res.setHeader('Content-Type', 'text/html; charset=utf-8');
     res.statusCode = 200;
     // Alternatively:
