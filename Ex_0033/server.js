@@ -16,27 +16,21 @@ const __dirname = import.meta.dirname;
 import { serveStatic } from './utils/serveStatic.js';
 console.log('serveStatic', serveStatic(__dirname));
 
-import fs from 'node:fs';
+import fs from 'node:fs/promises';
 
-const server = http.createServer((req, res) => {
+const server = http.createServer(async (req, res) => {
     const pathToResource = path.join(import.meta.dirname, 'public', 'index.html');
 
-    // First method, we don't use it:
-    // const content = fs.readFileSync(pathToResource, 'utf8');
-    // Problem with this: ...Sync - it is blocking, we prefer asynchronous
-
-    // Second method, asynchronous
-    fs.readFile(pathToResource, 'utf8', (err, content) => {
-        if (err) {
-            console.error(err);
-            return;
-        } else {
-            res.setHeader('Content-Type', 'text/html; charset=utf-8');
-            res.statusCode = 200;
-            res.write(content);
-            res.end();
-        }
-    });
+    // Third method, asynchronous, using async / await
+    const content = await fs.readFile(pathToResource); // utf8 deleted.
+    // const content = await fs.readFile(pathToResource, 'utf8'); // We will soon delete utf8.
+    // utf8 makes the code less flexible, this could not be used to serve pictures, audio, etc.
+    // Not specifying the data type will cause readFile to return Buffer - a special data type with raw data.
+    // Web Browser, using Header of text/html should still be able to correctly interpret and render Buffer data.
+    res.setHeader('Content-Type', 'text/html; charset=utf-8');
+    res.statusCode = 200;
+    res.write(content);
+    res.end();
 });
 
 server.listen(PORT, () => console.log(`Listening on ${PORT}`));
@@ -62,5 +56,30 @@ const server = http.createServer((req, res) => {
     Comment ends here/
     res.write('<html><h1>The server is working</h1></html>');
     res.end();
+});
+*/
+
+/*
+// FS read synchronous and async first take
+import fs from 'node:fs';
+const server = http.createServer((req, res) => {
+    const pathToResource = path.join(import.meta.dirname, 'public', 'index.html');
+
+    // First method, we don't use it:
+    // const content = fs.readFileSync(pathToResource, 'utf8');
+    // Problem with this: ...Sync - it is blocking, we prefer asynchronous
+
+    // Second method, asynchronous
+    fs.readFile(pathToResource, 'utf8', (err, content) => {
+        if (err) {
+            console.error(err);
+            return;
+        } else {
+            res.setHeader('Content-Type', 'text/html; charset=utf-8');
+            res.statusCode = 200;
+            res.write(content);
+            res.end();
+        }
+    });
 });
 */
