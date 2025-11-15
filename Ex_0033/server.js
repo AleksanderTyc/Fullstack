@@ -11,6 +11,11 @@ const PORT = 8000;
 console.log('CWD', process.cwd());
 import path from 'node:path';
 
+const __dirname = import.meta.dirname;
+
+import { serveStatic } from './utils/serveStatic.js';
+console.log('serveStatic', serveStatic(__dirname));
+
 const server = http.createServer((req, res) => {
     const pathToResource = path.join(import.meta.dirname, 'public', 'index.html');
     console.log('pathToResource', pathToResource);
