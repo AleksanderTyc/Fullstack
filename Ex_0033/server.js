@@ -10,19 +10,14 @@ const PORT = 8000;
 // Paths specified using the Path module are relative to CWD (and not to the file where the code resides).
 // console.log('CWD', process.cwd());
 
-import path from 'node:path';
+// import path from 'node:path';
 import { serveStatic } from './utils/serveStatic.js';
-import fs from 'node:fs/promises';
+// import fs from 'node:fs/promises';
 const __dirname = import.meta.dirname;
 
 const server = http.createServer(async (req, res) => {
     // Third method, asynchronous, using async / await
-    const pathToResource = serveStatic(__dirname);
-    const content = await fs.readFile(pathToResource); // utf8 deleted.
-    res.setHeader('Content-Type', 'text/html; charset=utf-8');
-    res.statusCode = 200;
-    res.write(content);
-    res.end();
+    await serveStatic(req, res, __dirname);
 });
 
 server.listen(PORT, () => console.log(`Listening on ${PORT}`));
@@ -88,3 +83,17 @@ const server = http.createServer(async (req, res) => {
     res.end();
 });
 */
+
+/*
+// CommonJS vs ES
+require vs import - see FullstackNotes.md
+console.log(__dirname); vs console.log( import.meta.dirname );
+console.log(__filename); vs console.log( import.meta.filename );
+// Before JS ES Node 20:
+import path from 'node:path';
+import url from 'node:url';
+const __filename = url.fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+// Slick, eh?
+*/
+
