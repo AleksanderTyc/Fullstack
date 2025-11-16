@@ -8,25 +8,17 @@ const PORT = 8000;
 // We would like to work with a file `${import.meta.dirname}/public/thisOrThat.extension`, but this is OS-specific
 // Instead we will use CWD and Path module.
 // Paths specified using the Path module are relative to CWD (and not to the file where the code resides).
-console.log('CWD', process.cwd());
-import path from 'node:path';
+// console.log('CWD', process.cwd());
 
+import path from 'node:path';
+import { serveStatic } from './utils/serveStatic.js';
+import fs from 'node:fs/promises';
 const __dirname = import.meta.dirname;
 
-import { serveStatic } from './utils/serveStatic.js';
-console.log('serveStatic', serveStatic(__dirname));
-
-import fs from 'node:fs/promises';
-
 const server = http.createServer(async (req, res) => {
-    const pathToResource = path.join(import.meta.dirname, 'public', 'index.html');
-
     // Third method, asynchronous, using async / await
+    const pathToResource = serveStatic(__dirname);
     const content = await fs.readFile(pathToResource); // utf8 deleted.
-    // const content = await fs.readFile(pathToResource, 'utf8'); // We will soon delete utf8.
-    // utf8 makes the code less flexible, this could not be used to serve pictures, audio, etc.
-    // Not specifying the data type will cause readFile to return Buffer - a special data type with raw data.
-    // Web Browser, using Header of text/html should still be able to correctly interpret and render Buffer data.
     res.setHeader('Content-Type', 'text/html; charset=utf-8');
     res.statusCode = 200;
     res.write(content);
@@ -81,5 +73,18 @@ const server = http.createServer((req, res) => {
             res.end();
         }
     });
+});
+*/
+
+/*
+// FS read asynchronous with async / await
+const server = http.createServer(async (req, res) => {
+    // Third method, asynchronous, using async / await
+    const pathToResource = serveStatic(__dirname);
+    const content = await fs.readFile(pathToResource); // utf8 deleted.
+    res.setHeader('Content-Type', 'text/html; charset=utf-8');
+    res.statusCode = 200;
+    res.write(content);
+    res.end();
 });
 */
