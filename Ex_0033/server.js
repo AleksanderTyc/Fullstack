@@ -15,12 +15,31 @@ import { serveStatic } from './utils/serveStatic.js';
 // import fs from 'node:fs/promises';
 const __dirname = import.meta.dirname;
 
+// import { getData } from "./utils/getData.js";
+import { handleGet } from "./handlers/routeHandlers.js";
+
 const server = http.createServer(async (req, res) => {
-    // Third method, asynchronous, using async / await
-    await serveStatic(req, res, __dirname);
+
+    if (req.url.startsWith('/api')) {
+        if (req.method === 'GET') {
+            await handleGet(res);
+        }
+
+    } else {
+        // Third method, asynchronous, using async / await
+        await serveStatic(req, res, __dirname);
+    }
 });
 
-server.listen(PORT, () => console.log(`Listening on ${PORT}`));
+server.listen(PORT, async () => {
+    // We can have it here, to have await inside an async function...
+    // console.log('*** DIAG *** data', await getData(__dirname));
+    console.log(`Listening on ${PORT}`);
+});
+
+// ...or we can have it here, using .then, to avoid await in top level code.
+// getData(__dirname).then(d => console.log('*** DIAG *** data', d));
+// console.log('*** DIAG *** data', await getData(__dirname)); // WFT?!? It works, too. Maybe it is the ES thing...
 
 // console.log('server.js last line', import.meta, testImport());
 // import.meta refers to this module; import.meta mentioned within testImport body refers to ./public/testImport.js file
