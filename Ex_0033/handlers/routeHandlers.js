@@ -1,6 +1,8 @@
 import { getData } from "../utils/getData.js";
 import { sendResponse } from '../utils/sendResponse.js';
 import { parseJSONBody } from '../utils/parseJSONBody.js';
+import { addNewSighting } from '../utils/addNewSighting.js';
+
 
 // handle GET
 async function handleGet(res) {
@@ -39,15 +41,16 @@ async function handlePost(req, res) {
 
     try {
         const parsedBody = await parseJSONBody(req);
-        // await addNewSighting(parsedBody);
+        await addNewSighting(parsedBody);
         sendResponse(res, 'application/json', 201, JSON.stringify(parsedBody)); // 201 request processed successfully
         res.end();
     }
     catch (err) {
+        console.error(`*** ERROR *** handlePost, catch`, err.message);
         sendResponse(res, 'application/json', 400, JSON.stringify({ error: err })); // 400 bad request
         res.end();
     }
-    console.log('POST request received, rawBody is', parsedBody);
+    // console.log('POST request received, rawBody is', parsedBody);
 }
 
 export { handleGet, handlePost };
