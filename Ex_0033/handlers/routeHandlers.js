@@ -36,11 +36,18 @@ async function handleGet(res) {
 // Then message is a JSON string, which may be parsed to a JS Object.
 
 async function handlePost(req, res) {
-    const rawBody = await parseJSONBody(req);
 
-    // sendResponse(res, 'application/json', 200, JSON.stringify(we do not yet know what));
-    res.end();
-    console.log( 'POST request received, rawBody is', rawBody);
+    try {
+        const parsedBody = await parseJSONBody(req);
+        // await addNewSighting(parsedBody);
+        sendResponse(res, 'application/json', 201, JSON.stringify(parsedBody)); // 201 request processed successfully
+        res.end();
+    }
+    catch (err) {
+        sendResponse(res, 'application/json', 400, JSON.stringify({ error: err })); // 400 bad request
+        res.end();
+    }
+    console.log('POST request received, rawBody is', parsedBody);
 }
 
 export { handleGet, handlePost };
