@@ -2,7 +2,7 @@ import { getData } from "../utils/getData.js";
 import { sendResponse } from '../utils/sendResponse.js';
 import { parseJSONBody } from '../utils/parseJSONBody.js';
 import { addNewSighting } from '../utils/addNewSighting.js';
-
+import { sanitiseSighting } from '../utils/sanitiseSighting.js';
 
 // handle GET
 async function handleGet(res) {
@@ -41,8 +41,10 @@ async function handlePost(req, res) {
 
     try {
         const parsedBody = await parseJSONBody(req);
-        await addNewSighting(parsedBody);
-        sendResponse(res, 'application/json', 201, JSON.stringify(parsedBody)); // 201 request processed successfully
+        const sanitisedBody = sanitiseSighting(parsedBody);
+        console.log('*** I *** handlePost, sanitisedBody', sanitisedBody);
+        await addNewSighting(sanitisedBody);
+        sendResponse(res, 'application/json', 201, JSON.stringify(sanitisedBody)); // 201 request processed successfully
         res.end();
     }
     catch (err) {
