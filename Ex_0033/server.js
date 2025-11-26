@@ -16,18 +16,25 @@ import { serveStatic } from './utils/serveStatic.js';
 const __dirname = import.meta.dirname;
 
 // import { getData } from "./utils/getData.js";
-import { handleGet, handlePost } from "./handlers/routeHandlers.js";
+import { handleGet, handlePost, handleNews } from "./handlers/routeHandlers.js";
 
 const server = http.createServer(async (req, res) => {
 
-    if (req.url.startsWith('/api')) {
+    if (req.url.startsWith('/api/news')) {
+        return await handleNews(req, res);
+    }
+    
+    else if (req.url.startsWith('/api')) {
         if (req.method === 'GET') {
             await handleGet(res);
-        } else if (req.method === 'POST') {
+        }
+        
+        else if (req.method === 'POST') {
             await handlePost(req, res);
         }
-
-    } else {
+    }
+    
+    else {
         // Third method, asynchronous, using async / await
         await serveStatic(req, res, __dirname);
     }

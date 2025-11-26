@@ -5,6 +5,8 @@ import { addNewSighting } from '../utils/addNewSighting.js';
 import { sanitiseSighting } from '../utils/sanitiseSighting.js';
 import { sightingEvents } from "../events/sightingEvents.js";
 
+import { stories } from "../data/stories.js";
+
 // handle GET
 async function handleGet(res) {
     const parsedData = await getData();
@@ -57,4 +59,34 @@ async function handlePost(req, res) {
     // console.log('POST request received, rawBody is', parsedBody);
 }
 
-export { handleGet, handlePost };
+async function handleNews(req, res) {
+    const dateRes = new Date();
+    // console.log(`* D * handleNews * ${dateRes} * New request`, req);
+    console.log(`* D * handleNews * ${dateRes} * New request`, req.rawHeaders[3], req.rawHeaders[13]);
+    
+    res.statusCode = 200;
+
+    // Set Content-Type, Cache-Control, Connection headers.
+    res.setHeader('Content-Type', 'text/event-stream');
+    res.setHeader('Cache-Control', 'no-cache');
+    res.setHeader('Connectioin', 'keep-alive');
+
+    setInterval(() => {
+        let randomIndex = Math.floor(Math.random() * stories.length);
+
+        // Use res.write() to send object to client. The object should contain:
+        // - an event property with a descriptive name
+        // - a story chosen at random from the stories array
+        // The object is contained in a string which starts with 'data: '.
+        // At the end of the string there are two new-line characters.
+        res.write(`data: ${JSON.stringify({ event: 'news-updated', story: stories[randomIndex] })}\n\n`);
+
+        const dateRes = new Date();
+        console.log(`* I * handleNews * ${dateRes} * New story selected at random, index ${randomIndex}`, req.rawHeaders[3], req.rawHeaders[13]);
+
+        // My take: A new setInterval will be set for every new request, even from the same client (Reload).
+        // There is no mechanism to unlink setInterval from dead client or to terminate such request (res.end()).
+    }, 3000);
+
+}
+export { handleGet, handlePost, handleNews };
