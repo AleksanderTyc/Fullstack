@@ -1,3 +1,9 @@
+import { EventEmitter } from "node:events";
+
+const tempUpdEventEmitter = new EventEmitter();
+
+tempUpdEventEmitter.on('temp-data-upd', sendTempUpdate);
+
 import http from "node:http";
 
 const PORT = 8010;
@@ -16,6 +22,24 @@ import { currTemp, updateTemp } from './utils/getTemp.js'
 // import fs from 'node:fs/promises';
 const __dirname = import.meta.dirname;
 
+setInterval(() => {
+    updateTemp();
+    tempUpdEventEmitter.emit('temp-data-upd', currTemp);
+}, 2000);
+
+// Register res objects and send SEE event to each registered connection
+const connectionsArray = [];
+function sendTempUpdate(updTemp) {
+    connectionsArray.forEach(res => {
+        sendTempUpdateEvent(res, updTemp)
+    });
+}
+
+// Handle individual connection update
+function sendTempUpdateEvent(res, updTemp) {
+    res.write(`data: ${JSON.stringify({ event: 'temp-updated', temp: currTemp })}\n\n`);
+}
+
 const server = http.createServer(async (req, res) => {
 
     if (req.url.startsWith('/temp/live')) {
@@ -23,12 +47,9 @@ const server = http.createServer(async (req, res) => {
         res.setHeader('Content-Type', 'text/event-stream');
         res.setHeader('Cache-Control', 'no-cache');
         res.setHeader('Connection', 'keep-alive');
-
-        setInterval(() => {
-            updateTemp();
-            res.write(`data: ${JSON.stringify({ event: 'temp-updated', temp: currTemp })}\n\n`);
-        }, 2000);
-
+        connectionsArray.push(res); // Every connection must register to receive temperature update
+        // I don't know how to detect connection close, so I cannot deregister.
+        // But it works much better than the original.
     } else {
         await serveWeatherStatic(req, res, __dirname);
     }
