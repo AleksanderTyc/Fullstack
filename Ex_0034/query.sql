@@ -42,4 +42,12 @@
 -- Same as above, but exclude records where count is 1
 -- SELECT brand, count(*) as count, floor(avg(price)) AS avg_price FROM cars WHERE sold = FALSE GROUP BY brand HAVING count(*) > 1; -- No alias allowed
 
-SELECT year, count(year) as count, min(price) AS min_price, max(price) AS max_price FROM cars WHERE sold GROUP BY year HAVING count(year) > 1 ORDER BY count;
+-- SELECT year, count(year) as count, min(price) AS min_price, max(price) AS max_price FROM cars WHERE sold GROUP BY year HAVING count(year) > 1 ORDER BY count;
+
+-- Challenge 2
+-- 5 oldest
+-- SELECT brand, model, year FROM cars WHERE sold = FALSE ORDER BY year LIMIT 5;
+-- The most common colours we have in stock
+-- SELECT color, count(color) as count FROM cars WHERE sold = FALSE GROUP BY color ORDER BY count desc LIMIT 5;
+-- SELECT color, count(color) as count FROM cars WHERE sold = FALSE GROUP BY color HAVING count(color) > 2 ORDER BY count desc;
+
