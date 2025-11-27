@@ -1,4 +1,16 @@
 -- SELECT * FROM cars;
 -- SELECT brand, model, condition, year FROM cars;
 -- SELECT brand, model, condition, price FROM cars WHERE color = 'black';
-SELECT brand, model, condition, price FROM cars WHERE condition = 0;
+-- SELECT brand, model, condition, price FROM cars WHERE condition = 0;
+-- SELECT brand, model, condition, price FROM cars WHERE price < 50000;
+-- SELECT brand, model, condition, price, color FROM cars WHERE color != 'yellow'; -- Includes 'light yellow'
+-- SELECT brand, model, condition, price, color FROM cars WHERE color not like '%yellow%'; -- Excludes 'light yellow'
+-- SELECT brand, model, condition, price, color FROM cars WHERE model like 'DB%';
+-- SELECT brand, model, year, condition, price, color FROM cars WHERE year < 1970 AND condition >= 3;
+-- SELECT brand, model, year, condition, price, color FROM cars WHERE year <= 1989 AND year >= 1980; -- Alternatively:
+-- SELECT brand, model, year, condition, price, color FROM cars WHERE year between 1980 AND 1989;
+-- SELECT brand, model, year, condition, price, color FROM cars WHERE price between 20000 AND 60000 AND condition between 1 AND 3 AND color LIKE '%red%';
+-- SELECT brand, model, year, condition, price, color FROM cars WHERE sold = false AND (year between 1960 AND 1969 OR color LIKE '%red%');
+-- SELECT brand, model, year, condition, price, color FROM cars WHERE year in (1961, 1963, 1965, 1967, 1969) AND condition >=3 AND sold IS FALSE;
+-- I wouldn't buy American unless I could spend less than $50k
+SELECT brand, model, year, condition, price, color FROM cars WHERE sold = FALSE AND ((price >= 50000) AND (brand in ('Ford', 'Triumph', 'Chevrolet', 'Dodge'))) = FALSE
