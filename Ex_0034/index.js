@@ -80,7 +80,14 @@ import fs from "node:fs";
     const query = fs.readFileSync('query.sql', 'utf8');
 
     // Execute the query
-    const response = await db.query(query);
+    // const response = await db.query(query);
+
+    // Execute the CRUD query
+    await db.exec(query);
+
+    // Display the entire table
+    // const response = await db.query('SELECT brand, model, year, price FROM cars;');
+    const response = await db.query('SELECT * FROM cars;');
 
     // console.clear();
     console.table(response.rows);

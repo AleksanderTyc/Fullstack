@@ -51,3 +51,7 @@
 -- SELECT color, count(color) as count FROM cars WHERE sold = FALSE GROUP BY color ORDER BY count desc LIMIT 5;
 -- SELECT color, count(color) as count FROM cars WHERE sold = FALSE GROUP BY color HAVING count(color) > 2 ORDER BY count desc;
 
+-- UPDATE cars SET sold = TRUE WHERE brand = 'FSO'; -- Useful just to see the entire table, without any modification.
+-- UPDATE cars SET condition = 5, price = 465000 WHERE id = 15;
+
+DELETE FROM cars WHERE sold;
