@@ -1,0 +1,15 @@
+{
+  "name": "databasesi",
+  "version": "1.0.0",
+  "description": "Databases I",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "UrlykJ",
+  "license": "ISC",
+  "dependencies": {
+    "@electric-sql/pglite": "^0.3.14"
+  }
+}
