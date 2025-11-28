@@ -3,10 +3,8 @@ import reactLogo from "/src/assets/react.svg";
 
 const rootElem = ReactDOM.createRoot(document.getElementById('root'));
 
-rootElem.render(
-    <div>
-        <img src={reactLogo} alt="React logo"></img>
-        <h1>Fun Facts about React</h1>
+function Page() {
+    return(
         <ul>
             <li>Was first released in 2013</li>
             <li>Was originally created by Jordan Walke</li>
@@ -14,5 +12,9 @@ rootElem.render(
             <li>Is maintained by Meta</li>
             <li>Powers thousands of enterprise apps</li>
         </ul>
-    </div>
+    );
+}
+
+rootElem.render(
+    <Page />
 );
