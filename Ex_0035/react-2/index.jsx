@@ -7,6 +7,13 @@ function Header() {
     return (
         <header>
             <img src={reactLogo} alt="React Logo"></img>
+            <nav>
+                <ul>
+                    <li>Pricing</li>
+                    <li>About</li>
+                    <li>Contact</li>
+                </ul>
+            </nav>
         </header>
     );
 }
