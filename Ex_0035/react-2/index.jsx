@@ -5,10 +5,10 @@ const rootElem = ReactDOM.createRoot(document.getElementById('root'));
 
 function Header() {
     return (
-        <header>
-            <img src={reactLogo} alt="React Logo"></img>
+        <header className="header-cnt">
+            <img className="header-react-logo" src={reactLogo} alt="React Logo"></img>
             <nav>
-                <ul>
+                <ul className="nav-list">
                     <li>Pricing</li>
                     <li>About</li>
                     <li>Contact</li>
@@ -35,7 +35,7 @@ function MainContent() {
 
 function Footer() {
     return (
-        <footer>
+        <footer className="footer-cnt">
             <small>C 20xx Urlyk von Jungingen development.</small>
         </footer>
     );

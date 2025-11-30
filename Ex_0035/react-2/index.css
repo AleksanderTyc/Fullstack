@@ -8,3 +8,26 @@ body {
 h1 {
   margin-top: 30px;
 }
+
+.header-cnt {
+  display: flex;
+  justify-content: space-between;
+}
+
+.header-react-logo {
+  width: 55px;
+}
+
+.nav-list {
+  list-style: none;
+  display: flex;
+  justify-content: right;
+}
+
+.nav-list li {
+  padding: 0 10px;
+}
+
+.footer-cnt{
+  background-color: black;
+}
