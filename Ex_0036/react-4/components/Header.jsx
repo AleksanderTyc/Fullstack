@@ -1,4 +1,4 @@
-import globeLogo from "/globe.png";
+import globeLogo from "/images/globe.png";
 
 function Header() {
   return (

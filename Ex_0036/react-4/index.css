@@ -1,7 +1,6 @@
 html,
 body {
   margin: 0;
-  background-color: black;
   font-family: Inter, sans-serif;
 }
 
@@ -22,4 +21,34 @@ header>img {
 header>span {
   font-size: 0.9rem;
   font-weight: 500;
+}
+
+
+
+/* Entry related */
+.entry-cnt {
+  display: flex;
+  justify-content: space-evenly;
+  width: 700px;
+  margin: 0 auto;
+  /* margin-left: auto;
+  margin-right: auto; */
+  padding: 20px;
+  background-color: #ffe6a7;
+  border-bottom: 5px solid #99582a;
+}
+
+.entry-img {
+  width: 400px;
+}
+
+/* Notice that:
+- display is not necessary, because all elements (hn, p) take entire line anyway;
+- text-align and color could be included into .card class, because they do not affect the image
+*/
+.entry-flex {
+  text-align: center;
+  font-family: cursive; /* Firefox handles correctly, Chrome defaults to serif */
+  color: #432818;
+  display: block;
 }
