@@ -10,19 +10,19 @@ const geoData = {
 function Entry() {
     const entryImage = `/images/${geoData.image}`;
     return (
-        <div className="entry-cnt">
-            <img className="entry-img" src={entryImage} alt={geoData.title}></img>
-            <div className="entry-flex">
-                <p>
-                    <img className="map-pointer" src="/images/marker.png" alt="Map Marker Symbol"></img>
-                    {geoData.location}
-                    <a href={geoData.googleMapsLink} target="_blank">View on Google Maps</a>
-                </p>
-                <h1>{geoData.title}</h1>
-                <h4>{geoData.dates}</h4>
-                <p>{geoData.text}</p>
+        <article className="entry-cnt">
+            <div className="main-image-cnt">
+                <img className="entry-img" src={entryImage} alt={geoData.title}></img>
             </div>
-        </div>
+            <div className="entry-flex"> {/* a.k.a. info-container */}
+                <img className="map-pointer" src="/images/marker.png" alt="Map Marker Symbol"></img>
+                <span className="country">{geoData.location}</span>
+                <a href={geoData.googleMapsLink} target="_blank">View on Google Maps</a>
+                <h2 className="entry-title">{geoData.title}</h2>
+                <p className="entry-dates">{geoData.dates}</p>
+                <p className="entry-text">{geoData.text}</p>
+            </div>
+        </article>
     );
 }
 

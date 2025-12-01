@@ -38,17 +38,54 @@ header>span {
   border-bottom: 5px solid #99582a;
 }
 
+.main-image-cnt {
+  width: 125px;
+  height: 168px;
+  overflow: hidden;
+  border-radius: 5px;
+  flex-shrink: 0;
+  margin-right: 19px;
+}
+
 .entry-img {
-  width: 400px;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
 }
 
 /* Notice that:
 - display is not necessary, because all elements (hn, p) take entire line anyway;
 - text-align and color could be included into .card class, because they do not affect the image
 */
-.entry-flex {
-  text-align: center;
-  font-family: cursive; /* Firefox handles correctly, Chrome defaults to serif */
-  color: #432818;
-  display: block;
+.entry-flex span.country {
+  text-transform: uppercase;
+  font-size: 0.7rem;
+  margin-right: 12px;
+}
+
+.entry-flex a {
+  color: #2B283A;
+  font-size: 0.7rem;
+}
+
+.entry-flex a:visited {
+  color: #918E9B;
+}
+
+.entry-flex h2.entry-title {
+  margin-top: 7px;
+  margin-bottom: 17px;
+}
+
+.entry-flex p.entry-dates {
+  font-weight: bold;
+}
+
+.entry-flex p.entry-text {
+  line-height: 1.5;
+  font-size: 0.8rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;  
+  overflow: hidden;
 }
