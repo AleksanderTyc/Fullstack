@@ -1,5 +1,6 @@
 import { Header } from "./components/Header.jsx";
 import { Entry } from "./components/Entry.jsx";
+import journalData from "./data.js";
 
 const geoData = {
   image: "aditya-anjagi-KZSDCocsOEE-unsplash.jpg",
@@ -11,20 +12,24 @@ const geoData = {
 };
 
 function App() {
-  const ninja = ['Donatello', 'Michaelangelo', 'Rafael', 'Loenardo'];
-  const turtles = ninja.map(elem => <h2>{elem}</h2>);
+  // const ninja = ['Donatello', 'Michaelangelo', 'Rafael', 'Loenardo'];
+  // const turtles = ninja.map(elem => <h2>{elem}</h2>);
+  const journalJSX = journalData.map(location => <Entry
+    key={location.id}
+    // image={location.img}
+    image={{ src: geoData.image, alt: geoData.title }}
+    title={location.title}
+    location={location.country}
+    googleMapsLink={location.googleMapsLink}
+    dates={location.dates}
+    text={location.text}
+  />
+  );
   return (
     <>
-      {turtles}
+      {/* {turtles} */}
       <Header />
-      <Entry
-        image={geoData.image}
-        title={geoData.title}
-        location={geoData.location}
-        googleMapsLink={geoData.googleMapsLink}
-        dates={geoData.dates}
-        text={geoData.text}
-      />
+      {journalJSX}
     </>
   )
 }
