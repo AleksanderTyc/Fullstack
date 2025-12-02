@@ -11,8 +11,11 @@ const geoData = {
 };
 
 function App() {
+  const ninja = ['Donatello', 'Michaelangelo', 'Rafael', 'Loenardo'];
+  const turtles = ninja.map(elem => <h2>{elem}</h2>);
   return (
     <>
+      {turtles}
       <Header />
       <Entry
         image={geoData.image}
