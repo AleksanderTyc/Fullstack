@@ -1,9 +1,9 @@
 function Entry({image, title, location, googleMapsLink, dates, text}) {
-    const entryImage = `/images/${image.src}`;
+    // const entryImage = `/images/${image.src}`;
     return (
         <article className="entry-cnt">
             <div className="main-image-cnt">
-                <img className="entry-img" src={entryImage} alt={image.alt}></img>
+                <img className="entry-img" src={image.src} alt={image.alt}></img>
             </div>
             <div className="entry-flex"> {/* a.k.a. info-container */}
                 <img className="map-pointer" src="/images/marker.png" alt="Map Marker Symbol"></img>

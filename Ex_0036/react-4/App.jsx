@@ -16,8 +16,8 @@ function App() {
   // const turtles = ninja.map(elem => <h2>{elem}</h2>);
   const journalJSX = journalData.map(location => <Entry
     key={location.id}
-    // image={location.img}
-    image={{ src: geoData.image, alt: geoData.title }}
+    image={location.img}
+    // image={{ src: geoData.image, alt: geoData.title }}
     title={location.title}
     location={location.country}
     googleMapsLink={location.googleMapsLink}
