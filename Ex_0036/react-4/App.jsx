@@ -25,7 +25,17 @@ function App() {
     text={location.text}
   />
   );
-  return (
+// Alternative ways to pass data on to Entry component:
+// 1. Instead of `image=... text={location.text}` we have `location={location}`
+// and then in Entry code we need to have `Entry(props)`
+// where props is now an object with a single member named `location`.
+// So we have e.g. `alt={props.location.image.alt}` etc.
+// 2. Instead of `image=... text={location.text}` we have `{...location}`
+// and then in Entry code we may have `Entry(props)`
+// where props is now an object members such as `image, title, location` etc.
+// or we may leave it as it is now `Entry({image, title, location, googleMapsLink, dates, text})`.
+// In the former case we then need to code e.g. `alt={props.image.alt}` etc.
+return (
     <>
       {/* {turtles} */}
       <Header />
