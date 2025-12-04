@@ -14,6 +14,7 @@ function Main() {
     // setIngredients(Array.of(...ingredients, newIngredient));
     // We can also use a callback function, which receives the previous value of state:
     // setIngredients(previousIngredients => Array.of(...previousIngredients, newIngredient));
+    // Simplified: setIngredients(previousIngredients => [...previousIngredients, newIngredient]);
     // Initially I thought that the callback's argument is different from the state itself, so this should work:
     // setIngredients(previousIngredients => {
     //     previousIngredients.push(newIngredient);
@@ -32,6 +33,11 @@ function Main() {
     // The course seems to suggest against using the state directly. Instead, if we need the previous state
     // to determine the new state, we should use callback function.
 
+    // Similarly to setIngredients(previousIngredients => [...previousIngredients, newIngredient]);
+    // we can also update the state of an object, where only a particular property requires changing:
+    // setContact(prevContact => {...prevContact, prevContact.email: newEmail});
+    // setContact(prevContact => {...prevContact, prevContact.isFavourite: !prevContact.isFavourite});
+    
     function handleOnSubmit(evt) {
         evt.preventDefault();
         const formData = new FormData(evt.currentTarget);
@@ -41,19 +47,12 @@ function Main() {
         setIngredients(previousIngredients => Array.of(...previousIngredients, newIngredient));
     }
 
-    const [ourBool, setOurBool] = React.useState(true);
-
-    function handleOnClick() {
-        setOurBool(current => !current);
-    }
-
     return (
         <main>
             <form onSubmit={handleOnSubmit} className="add-ingredient-form">
                 <input name="ingredient" type="text" placeholder="e.g. oregano" aria-label="Add ingredient"></input>
                 <button>Add ingredient</button>
             </form>
-            <button onClick={handleOnClick}>{ourBool ? "Add" : "Subtract"}</button>
             <ul>
                 {ingredients.map((ingr, idx) => <li key={idx}>{ingr}</li>)}
             </ul>
