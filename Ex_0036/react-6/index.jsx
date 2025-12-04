@@ -7,7 +7,9 @@ function signupFormSubmit(formData) {
     const dataPwd = formData.get('passwordName');
     const dataDescr = formData.get('descrName');
     const dataEmplStatus = formData.get('emplStatusName');
-    console.log(`* I * (dataEmail, dataPwd, dataDescr, dataEmplStatus) is (${dataEmail}, ${dataPwd}, ${dataDescr}, ${dataEmplStatus})`)
+    const dataDietRestr = formData.getAll('dietRestrName');
+    console.log(`* I * datatype of dataDietRestr is ${typeof dataDietRestr}, ${dataDietRestr}`, dataDietRestr);
+    // console.log(`* I * (dataEmail, dataPwd, dataDescr, dataEmplStatus, dataDietRestr) is (${dataEmail}, ${dataPwd}, ${dataDescr}, ${dataEmplStatus}, ${dataDietRestr})`)
 }
 
 function App() {
@@ -15,18 +17,22 @@ function App() {
         <section>
             <h1>Signup</h1>
             <form action={signupFormSubmit}>
+
                 <p>
                     <label htmlFor="emailId">Email:</label>
                     <input id="emailId" name="emailName" type="email" defaultValue="joe.schmoe@email.com" />
                 </p>
+
                 <p>
                     <label htmlFor='passwordId'>Password:</label>
                     <input id='passwordId' name='passwordName' type="password" />
                 </p>
+
                 <p>
                     <label htmlFor='descrId'>Description:</label>
                     <textarea id='descrId' name='descrName' />
                 </p>
+
                 <fieldset>
                     <legend>Employment status</legend>
                     <input id='radio1Id' name='emplStatusName' type="radio" value='O1' defaultChecked={true} />
@@ -34,6 +40,15 @@ function App() {
                     <input id='radio2Id' name='emplStatusName' type="radio" value='O2' />
                     <label htmlFor='radio2Id'>Retired</label>
                 </fieldset>
+
+                <fieldset>
+                    <legend>Dietary restrictions</legend>
+                    <input id='check1Id' name='dietRestrName' type="checkbox" value='D1' />
+                    <label htmlFor='check1Id'>Nuts</label>
+                    <input id='check2Id' name='dietRestrName' type="checkbox" value='D2' defaultChecked={true} />
+                    <label htmlFor='check2Id'>Honey</label>
+                </fieldset>
+
                 <input type='submit' value='Submit' />
             </form>
         </section>
