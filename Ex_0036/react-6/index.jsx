@@ -29,7 +29,7 @@ function App() {
                 </p>
                 <fieldset>
                     <legend>Employment status</legend>
-                    <input id='radio1Id' name='emplStatusName' type="radio" value='O1'/>
+                    <input id='radio1Id' name='emplStatusName' type="radio" value='O1' defaultChecked={true} />
                     <label htmlFor='radio1Id'>Unemployed</label>
                     <input id='radio2Id' name='emplStatusName' type="radio" value='O2' />
                     <label htmlFor='radio2Id'>Retired</label>
