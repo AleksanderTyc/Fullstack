@@ -38,9 +38,9 @@ function Main() {
     // setContact(prevContact => {...prevContact, prevContact.email: newEmail});
     // setContact(prevContact => {...prevContact, prevContact.isFavourite: !prevContact.isFavourite});
     
-    function handleOnSubmit(evt) {
-        evt.preventDefault();
-        const formData = new FormData(evt.currentTarget);
+    function handleOnSubmit(formData) {
+        // evt.preventDefault();
+        // const formData = new FormData(evt.currentTarget);
         const newIngredient = formData.get("ingredient");
         // console.log( ...ingredients);
         console.log("Form submitted", newIngredient, Array.of(...ingredients, newIngredient));
@@ -49,7 +49,7 @@ function Main() {
 
     return (
         <main>
-            <form onSubmit={handleOnSubmit} className="add-ingredient-form">
+            <form action={handleOnSubmit} className="add-ingredient-form">
                 <input name="ingredient" type="text" placeholder="e.g. oregano" aria-label="Add ingredient"></input>
                 <button>Add ingredient</button>
             </form>
