@@ -54,7 +54,8 @@ function App() {
 
                 <p>
                     <label htmlFor='dropDownId'>Choose colour</label>
-                    <select id='dropDownId' name='dropDownName' defaultValue="Yellow">
+                    <select id='dropDownId' name='dropDownName' defaultValue="" required>
+                    <option disabled value="">-- Choose an option --</option>
                     <option value="red">Red</option>
                     <option>Yellow</option>
                     <option>Blue</option>
@@ -104,4 +105,15 @@ function signupFormSubmit(formData) {
 }
 
             <form action={signupFormSubmit}>
+*/
+
+/* Drop down box simple
+                    <select id='dropDownId' name='dropDownName' defaultValue="Yellow">
+                    <option value="red">Red</option>
+*/
+
+/* Drop down box with exclusion
+                    <select id='dropDownId' name='dropDownName' defaultValue="" required>
+                    <option disabled value="">-- Choose an option --</option>
+                    <option value="red">Red</option>
 */
