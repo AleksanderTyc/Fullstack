@@ -3,16 +3,23 @@ import ReactDOM from 'react-dom/client';
 const rootObj = ReactDOM.createRoot(document.getElementById('root'));
 
 function signupFormSubmit(formData) {
-    const dataEmail = formData.get('emailName');
-    const dataPwd = formData.get('passwordName');
-    const dataDescr = formData.get('descrName');
-    const dataEmplStatus = formData.get('emplStatusName');
-    const dataDietRestr = formData.getAll('dietRestrName');
-    const datadropDown = formData.get('dropDownName'); // If value prop is set on <option> element, value will be returned.
-    console.log(`* I * datatype of dataDietRestr is ${typeof dataDietRestr}, ${dataDietRestr}`, dataDietRestr);
-    console.log(`* I * datadropDown is`, datadropDown);
-    
+    // const dataEmail = formData.get('emailName');
+    // const dataPwd = formData.get('passwordName');
+    // const dataDescr = formData.get('descrName');
+    // const dataEmplStatus = formData.get('emplStatusName');
+    // const dataDietRestr = formData.getAll('dietRestrName');
+    // const datadropDown = formData.get('dropDownName'); // If value prop is set on <option> element, value will be returned.
+    // console.log(`* I * datatype of dataDietRestr is ${typeof dataDietRestr}, ${dataDietRestr}`, dataDietRestr);
+    // console.log(`* I * datadropDown is`, datadropDown);
+
     // console.log(`* I * (dataEmail, dataPwd, dataDescr, dataEmplStatus, dataDietRestr) is (${dataEmail}, ${dataPwd}, ${dataDescr}, ${dataEmplStatus}, ${dataDietRestr})`)
+
+    // Object from Entries method:
+    const formObject = Object.fromEntries(formData);
+    const formObjectModd = { ...formObject, dietRestrName: formData.getAll('dietRestrName') };
+    console.log(`* I * formObject is`, formObject);
+    console.log(`* I * formObjectModd is`, formObjectModd);
+
 }
 
 function App() {
@@ -55,11 +62,11 @@ function App() {
                 <p>
                     <label htmlFor='dropDownId'>Choose colour</label>
                     <select id='dropDownId' name='dropDownName' defaultValue="" required>
-                    <option disabled value="">-- Choose an option --</option>
-                    <option value="red">Red</option>
-                    <option>Yellow</option>
-                    <option>Blue</option>
-                    <option>Orange</option>
+                        <option disabled value="">-- Choose an option --</option>
+                        <option value="red">Red</option>
+                        <option>Yellow</option>
+                        <option>Blue</option>
+                        <option>Orange</option>
                     </select>
                 </p>
 
