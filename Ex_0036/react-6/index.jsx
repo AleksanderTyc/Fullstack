@@ -5,7 +5,9 @@ const rootObj = ReactDOM.createRoot(document.getElementById('root'));
 function signupFormSubmit(formData) {
     const dataEmail = formData.get('emailName');
     const dataPwd = formData.get('passwordName');
-    console.log(`* I * (dataEmail, dataPwd) is (${dataEmail}, ${dataPwd})`)
+    const dataDescr = formData.get('descrName');
+    const dataEmplStatus = formData.get('emplStatusName');
+    console.log(`* I * (dataEmail, dataPwd, dataDescr, dataEmplStatus) is (${dataEmail}, ${dataPwd}, ${dataDescr}, ${dataEmplStatus})`)
 }
 
 function App() {
@@ -15,12 +17,23 @@ function App() {
             <form action={signupFormSubmit}>
                 <p>
                     <label htmlFor="emailId">Email:</label>
-                    <input id="emailId" name="emailName" type="email" placeholder="joe.schmoe@email.com" />
+                    <input id="emailId" name="emailName" type="email" defaultValue="joe.schmoe@email.com" />
                 </p>
                 <p>
                     <label htmlFor='passwordId'>Password:</label>
                     <input id='passwordId' name='passwordName' type="password" />
                 </p>
+                <p>
+                    <label htmlFor='descrId'>Description:</label>
+                    <textarea id='descrId' name='descrName' />
+                </p>
+                <fieldset>
+                    <legend>Employment status</legend>
+                    <input id='radio1Id' name='emplStatusName' type="radio" value='O1'/>
+                    <label htmlFor='radio1Id'>Unemployed</label>
+                    <input id='radio2Id' name='emplStatusName' type="radio" value='O2' />
+                    <label htmlFor='radio2Id'>Retired</label>
+                </fieldset>
                 <input type='submit' value='Submit' />
             </form>
         </section>
