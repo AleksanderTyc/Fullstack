@@ -54,3 +54,13 @@ function signupFormSubmit(evt) {
 
             <form onSubmit={signupFormSubmit} method="GET">
 */
+
+/* Modern React way - use action, no method, no need to block page reload, form clean up automatic
+function signupFormSubmit(formData) {
+    const dataEmail = formData.get('emailName');
+    const dataPwd = formData.get('passwordName');
+    console.log(`* I * (dataEmail, dataPwd) is (${dataEmail}, ${dataPwd})`)
+}
+
+            <form action={signupFormSubmit}>
+*/
