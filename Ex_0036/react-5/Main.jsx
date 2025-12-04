@@ -41,12 +41,19 @@ function Main() {
         setIngredients(previousIngredients => Array.of(...previousIngredients, newIngredient));
     }
 
+    const [ourBool, setOurBool] = React.useState(true);
+
+    function handleOnClick() {
+        setOurBool(current => !current);
+    }
+
     return (
         <main>
             <form onSubmit={handleOnSubmit} className="add-ingredient-form">
                 <input name="ingredient" type="text" placeholder="e.g. oregano" aria-label="Add ingredient"></input>
                 <button>Add ingredient</button>
             </form>
+            <button onClick={handleOnClick}>{ourBool ? "Add" : "Subtract"}</button>
             <ul>
                 {ingredients.map((ingr, idx) => <li key={idx}>{ingr}</li>)}
             </ul>
