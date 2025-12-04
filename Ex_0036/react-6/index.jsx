@@ -2,8 +2,7 @@ import ReactDOM from 'react-dom/client';
 
 const rootObj = ReactDOM.createRoot(document.getElementById('root'));
 
-function signupFormSubmit(evt) {
-    const formData = new FormData(evt.currentTarget);
+function signupFormSubmit(formData) {
     const dataEmail = formData.get('emailName');
     const dataPwd = formData.get('passwordName');
     console.log(`* I * (dataEmail, dataPwd) is (${dataEmail}, ${dataPwd})`)
@@ -13,7 +12,7 @@ function App() {
     return (
         <section>
             <h1>Signup</h1>
-            <form onSubmit={signupFormSubmit} method="GET">
+            <form action={signupFormSubmit}>
                 <p>
                     <label htmlFor="emailId">Email:</label>
                     <input id="emailId" name="emailName" type="email" placeholder="joe.schmoe@email.com" />
@@ -41,4 +40,17 @@ function signupFormSubmit(evt) {
             <form onSubmit={signupFormSubmit} method="GET">
 I think there is a lot more going on behind the scene. POST method leads to an error: 404
 GET also attempts to reload the page, the address contains parameters, but there is no error.
+*/
+
+/* Handling onSubmit event in JS - necessary to get FormData manually, prevent the page reload and force form cleanup
+function signupFormSubmit(evt) {
+    evt.preventDefault(); // Prevents page reload, but also prevents form cleanup
+    const formData = new FormData(evt.currentTarget);
+    const dataEmail = formData.get('emailName');
+    const dataPwd = formData.get('passwordName');
+    console.log(`* I * (dataEmail, dataPwd) is (${dataEmail}, ${dataPwd})`);
+    evt.currentTarget.reset(); // Cleans up the form as necessary with preventDefault in place
+}
+
+            <form onSubmit={signupFormSubmit} method="GET">
 */
