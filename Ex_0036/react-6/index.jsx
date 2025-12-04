@@ -8,7 +8,10 @@ function signupFormSubmit(formData) {
     const dataDescr = formData.get('descrName');
     const dataEmplStatus = formData.get('emplStatusName');
     const dataDietRestr = formData.getAll('dietRestrName');
+    const datadropDown = formData.get('dropDownName'); // If value prop is set on <option> element, value will be returned.
     console.log(`* I * datatype of dataDietRestr is ${typeof dataDietRestr}, ${dataDietRestr}`, dataDietRestr);
+    console.log(`* I * datadropDown is`, datadropDown);
+    
     // console.log(`* I * (dataEmail, dataPwd, dataDescr, dataEmplStatus, dataDietRestr) is (${dataEmail}, ${dataPwd}, ${dataDescr}, ${dataEmplStatus}, ${dataDietRestr})`)
 }
 
@@ -48,6 +51,16 @@ function App() {
                     <input id='check2Id' name='dietRestrName' type="checkbox" value='D2' defaultChecked={true} />
                     <label htmlFor='check2Id'>Honey</label>
                 </fieldset>
+
+                <p>
+                    <label htmlFor='dropDownId'>Choose colour</label>
+                    <select id='dropDownId' name='dropDownName' defaultValue="Yellow">
+                    <option value="red">Red</option>
+                    <option>Yellow</option>
+                    <option>Blue</option>
+                    <option>Orange</option>
+                    </select>
+                </p>
 
                 <input type='submit' value='Submit' />
             </form>
