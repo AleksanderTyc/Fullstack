@@ -8,7 +8,8 @@ function Main() {
     // Read new ingredient's value
 
     // Use State to manage the array of ingredients
-    const [ingredients, setIngredients] = React.useState(['Chicken', 'Oregano', 'Tomatoes']);
+    // const [ingredients, setIngredients] = React.useState(['Chicken', 'Oregano', 'Tomatoes']);
+    const [ingredients, setIngredients] = React.useState([]);
     // Remember - modifying state variable `ingredients` directly is not allowed.
     // We can do it by referring to `ingredients`:
     // setIngredients(Array.of(...ingredients, newIngredient));
@@ -37,7 +38,9 @@ function Main() {
     // we can also update the state of an object, where only a particular property requires changing:
     // setContact(prevContact => {...prevContact, prevContact.email: newEmail});
     // setContact(prevContact => {...prevContact, prevContact.isFavourite: !prevContact.isFavourite});
-    
+
+    const ingredientsListItems = ingredients.map((ingr, idx) => <li key={idx}>{ingr}</li>);
+
     function handleOnSubmit(formData) {
         // evt.preventDefault();
         // const formData = new FormData(evt.currentTarget);
@@ -53,9 +56,17 @@ function Main() {
                 <input name="ingredient" type="text" placeholder="e.g. oregano" aria-label="Add ingredient"></input>
                 <button>Add ingredient</button>
             </form>
-            <ul>
-                {ingredients.map((ingr, idx) => <li key={idx}>{ingr}</li>)}
-            </ul>
+            {ingredientsListItems.length > 0 && <section>
+                <h2>Ingredients on hand:</h2>
+                <ul className="ingredients-list" aria-live="polite">{ingredientsListItems}</ul>
+                {ingredientsListItems.length > 3 && <div className="get-recipe-container">
+                    <div>
+                        <h3>Ready for a recipe?</h3>
+                        <p>Generate a recipe from your list of ingredients.</p>
+                    </div>
+                    <button>Get a recipe</button>
+                </div>}
+            </section>}
         </main>
     );
 }
