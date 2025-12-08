@@ -2,13 +2,18 @@ import { useState } from 'react'
 import padsData from './pads.js';
 
 function Pad({ colour, toggle }) {
+
+  const [localState, setLocalState] = useState(toggle);
+
   function toggleButton() {
     console.log(`* I * toggleButton clicked, colour: ${colour}`);
+    setLocalState(prev => !prev);
   }
+
   return (
     <button
       style={{ backgroundColor: colour }}
-      className={toggle ? 'on' : undefined}
+      className={localState ? 'on' : undefined}
       onClick={toggleButton}
     >
       {colour}
