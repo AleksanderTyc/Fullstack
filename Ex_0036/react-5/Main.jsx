@@ -1,6 +1,7 @@
 import React from "react";
 import { ClaudeRecipe } from "./ClaudeRecipe";
 import { IngredientsList } from "./IngredientsList";
+import { getRecipeFromAI } from "./ai";
 
 
 function Main() {
@@ -12,7 +13,8 @@ function Main() {
 
     // Use State to manage the array of ingredients
     // const [ingredients, setIngredients] = React.useState(['Chicken', 'Oregano', 'Tomatoes']);
-    const [ingredients, setIngredients] = React.useState([]);
+    const [ingredients, setIngredients] = React.useState(['Egg', 'Bacon', 'Cream', 'Milk', 'Flour', 'Onion']);
+    // const [ingredients, setIngredients] = React.useState([]);
     // Remember - modifying state variable `ingredients` directly is not allowed.
     // We can do it by referring to `ingredients`:
     // setIngredients(Array.of(...ingredients, newIngredient));
@@ -46,6 +48,10 @@ function Main() {
 
     function handleGetRecipe() {
         setRecipeShown(true);
+        const responseRecipe = getRecipeFromAI(ingredients);
+        responseRecipe.then(answer => console.log('* I * Recipe - answer:', answer.choices[0]));
+        console.log('* I * Recipe - responseRecipe:', responseRecipe);
+        // return response.choices[0].message.content;
     }
 
     function handleOnSubmit(formData) {
@@ -63,7 +69,7 @@ function Main() {
                 <input name="ingredient" type="text" placeholder="e.g. oregano" aria-label="Add ingredient"></input>
                 <button>Add ingredient</button>
             </form>
-            {ingredients.length > 0 && <IngredientsList listIngredients={ingredients} handleGetRecipe={handleGetRecipe}/>}
+            {ingredients.length > 0 && <IngredientsList listIngredients={ingredients} handleGetRecipe={handleGetRecipe} />}
             {recipeShown && <ClaudeRecipe />}
         </main>
     );
