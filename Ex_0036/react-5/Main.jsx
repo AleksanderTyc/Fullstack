@@ -46,10 +46,15 @@ function Main() {
 
     const [recipeShown, setRecipeShown] = React.useState(false);
 
+    const [recipeContent, setRecipeContent] = React.useState('');
+
     function handleGetRecipe() {
-        setRecipeShown(true);
         const responseRecipe = getRecipeFromAI(ingredients);
-        responseRecipe.then(answer => console.log('* I * Recipe - answer:', answer.choices[0]));
+        responseRecipe.then(answer => {
+            console.log('* I * Recipe - answer:', answer.choices[0].message.content);
+            setRecipeContent(answer.choices[0].message.content);
+            setRecipeShown(true);
+        });
         console.log('* I * Recipe - responseRecipe:', responseRecipe);
         // return response.choices[0].message.content;
     }
@@ -70,7 +75,7 @@ function Main() {
                 <button>Add ingredient</button>
             </form>
             {ingredients.length > 0 && <IngredientsList listIngredients={ingredients} handleGetRecipe={handleGetRecipe} />}
-            {recipeShown && <ClaudeRecipe />}
+            {recipeShown && <ClaudeRecipe content={recipeContent} />}
         </main>
     );
 }

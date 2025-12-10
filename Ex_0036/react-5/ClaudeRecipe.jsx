@@ -3,6 +3,16 @@ function ClaudeRecipe(props) {
         <section>
             <h2>Chef Claude Recommends:</h2>
             <article className="suggested-recipe-container" aria-live="polite">
+                {props.content}
+            </article>
+        </section>);
+}
+
+function ClaudeRecipe_obs(props) {
+    return (
+        <section>
+            <h2>Chef Claude Recommends:</h2>
+            <article className="suggested-recipe-container" aria-live="polite">
                 <p>Based on the ingredients you have available, I would recommend making a simple a delicious <strong>Beef Bolognese Pasta</strong>. Here is the recipe:</p>
                 <h3>Beef Bolognese Pasta</h3>
                 <strong>Ingredients:</strong>
