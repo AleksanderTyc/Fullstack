@@ -13,8 +13,8 @@ function Main() {
 
     // Use State to manage the array of ingredients
     // const [ingredients, setIngredients] = React.useState(['Chicken', 'Oregano', 'Tomatoes']);
-    const [ingredients, setIngredients] = React.useState(['Egg', 'Bacon', 'Cream', 'Milk', 'Flour', 'Onion']);
-    // const [ingredients, setIngredients] = React.useState([]);
+    // const [ingredients, setIngredients] = React.useState(['Egg', 'Bacon', 'Cream', 'Milk', 'Flour', 'Onion']);
+    const [ingredients, setIngredients] = React.useState([]);
     // Remember - modifying state variable `ingredients` directly is not allowed.
     // We can do it by referring to `ingredients`:
     // setIngredients(Array.of(...ingredients, newIngredient));
@@ -44,19 +44,11 @@ function Main() {
     // setContact(prevContact => {...prevContact, prevContact.email: newEmail});
     // setContact(prevContact => {...prevContact, prevContact.isFavourite: !prevContact.isFavourite});
 
-    const [recipeShown, setRecipeShown] = React.useState(false);
-
     const [recipeContent, setRecipeContent] = React.useState('');
 
     function handleGetRecipe() {
         const responseRecipe = getRecipeFromAI(ingredients);
-        responseRecipe.then(answer => {
-            console.log('* I * Recipe - answer:', answer.choices[0].message.content);
-            setRecipeContent(answer.choices[0].message.content);
-            setRecipeShown(true);
-        });
-        console.log('* I * Recipe - responseRecipe:', responseRecipe);
-        // return response.choices[0].message.content;
+        responseRecipe.then(answer => setRecipeContent(answer.choices[0].message.content));
     }
 
     function handleOnSubmit(formData) {
@@ -75,7 +67,7 @@ function Main() {
                 <button>Add ingredient</button>
             </form>
             {ingredients.length > 0 && <IngredientsList listIngredients={ingredients} handleGetRecipe={handleGetRecipe} />}
-            {recipeShown && <ClaudeRecipe content={recipeContent} />}
+            {recipeContent && <ClaudeRecipe content={recipeContent} />}
         </main>
     );
 }
