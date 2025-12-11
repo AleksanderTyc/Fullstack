@@ -11,7 +11,6 @@ function Main(params) {
     function handleChange(event) {
         const {value} = event.currentTarget;
         console.log(`* I * handleChange, value: ${value}`);
-        // document.getElementsByClassName('top')[0].innerHTML = value; WTF?!?
         setMeme(prev => ({...prev, topText:value}));
     }
 
@@ -21,16 +20,17 @@ function Main(params) {
                 <label>Top Text
                     <input
                         type="text"
-                        placeholder="One does not simply"
+                        placeholder=".."
                         name="topText"
                         onChange={handleChange}
+                        value={meme.topText}
                     />
                 </label>
 
                 <label>Bottom Text
                     <input
                         type="text"
-                        placeholder="Walk into Mordor"
+                        placeholder=".. .."
                         name="bottomText"
                     />
                 </label>
