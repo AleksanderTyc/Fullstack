@@ -2,17 +2,17 @@ import React from 'react';
 
 function App() {
     const [starWarsData, setStarWarsData] = React.useState({});
-    const [count, setCount] = React.useState(0);
+    const [count, setCount] = React.useState(1);
 
     console.log('Rendered');
 
     React.useEffect(
         () => {
             console.log("Effect running");
-            fetch('https://swapi.dev/api/people/1')
+            fetch(`https://swapi.dev/api/people/${count}`)
                 .then(response => response.json())
                 .then(data => setStarWarsData(data))
-        }, []
+        }, [count]
     );
 
     return (
