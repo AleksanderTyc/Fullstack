@@ -8,6 +8,15 @@ function Main(params) {
         imageUrl: 'http://i.imgflip.com/1bij.jpg'
     });
 
+    const [memeArray, setMemeArray] = React.useState([]);
+    React.useEffect(
+        () => {
+            fetch('https://api.imgflip.com/get_memes')
+                .then(response => response.json())
+                .then(data => setMemeArray(data.data.memes));
+        },
+        []
+    );
     // How to receive not just the updated value of the component, which triggerred the event,
     // but also the name of the component itself?
     function handleChange(event) {
@@ -23,6 +32,12 @@ function Main(params) {
         ));
     }
 
+    // console.log('* I * Rendered, memeArray:', memeArray);
+
+    // const lisfOfMemeImgs = memeArray.map(memeData => <li key={memeData.id}><img src={memeData.url}></img></li>);
+    const lisfOfMemeImgs = [];
+
+    // const diagMemeImgs = memeArray.map(memeData => /)
     return (
         <main>
             <div className="form">
@@ -52,8 +67,15 @@ function Main(params) {
                 <span className="top">{meme.topText}</span>
                 <span className="bottom">{meme.bottomText}</span>
             </div>
+            <ul>
+                {lisfOfMemeImgs}
+            </ul>
         </main>
     );
 }
 
 export { Main };
+
+/*
+            <pre>{JSON.stringify(memeArray, null, 2)}</pre>
+*/
