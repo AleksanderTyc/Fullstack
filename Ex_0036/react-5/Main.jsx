@@ -45,6 +45,18 @@ function Main() {
     // setContact(prevContact => {...prevContact, prevContact.isFavourite: !prevContact.isFavourite});
 
     const [recipeContent, setRecipeContent] = React.useState('');
+    const refReady = React.useRef(null); // Notice how we declare it as const, but we know that "it" can be reassigned.
+    // In reality, refReady is an object, it contains a property "current", and this property is variable.
+    console.log('* I * refReady while rendering:', refReady);
+    // We can see that it is null at first render and it becomes <div> when the IngredientsList component is first rendered.
+
+    React.useEffect(
+        () => {
+            console.log('* I * refReady while useEffect:', refReady);
+            (refReady.current !== null) && refReady.current.scrollIntoView();
+        },
+        [recipeContent]
+    );
 
     function handleGetRecipe() {
         const responseRecipe = getRecipeFromAI(ingredients);
@@ -66,7 +78,7 @@ function Main() {
                 <input name="ingredient" type="text" placeholder="e.g. oregano" aria-label="Add ingredient"></input>
                 <button>Add ingredient</button>
             </form>
-            {ingredients.length > 0 && <IngredientsList listIngredients={ingredients} handleGetRecipe={handleGetRecipe} />}
+            {ingredients.length > 0 && <IngredientsList readyRef={refReady} listIngredients={ingredients} handleGetRecipe={handleGetRecipe} />}
             {recipeContent && <ClaudeRecipe content={recipeContent} />}
         </main>
     );
