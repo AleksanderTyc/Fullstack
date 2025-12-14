@@ -32,7 +32,14 @@ function Main(params) {
         ));
     }
 
+    function handleGetImage() {
+        // Select random image from the array:
+        const memeIndex = Math.floor(Math.random() * memeArray.length);
+        console.log(`* I * handleGetImage, selected index: ${memeIndex}, ${memeArray[memeIndex].url}`);
+        setMeme(prev => ({ ...prev, imageUrl: memeArray[memeIndex].url }));
+    }
     // console.log('* I * Rendered, memeArray:', memeArray);
+    console.log('* I * Rendered, meme:', meme);
 
     // const lisfOfMemeImgs = memeArray.map(memeData => <li key={memeData.id}><img src={memeData.url}></img></li>);
     const lisfOfMemeImgs = [];
@@ -60,16 +67,13 @@ function Main(params) {
                         value={meme.bottomText}
                     />
                 </label>
-                <button>Get a new meme image 🖼</button>
+                <button onClick={handleGetImage}>Get a new meme image 🖼</button>
             </div>
             <div className="meme">
                 <img src={meme.imageUrl} />
                 <span className="top">{meme.topText}</span>
                 <span className="bottom">{meme.bottomText}</span>
             </div>
-            <ul>
-                {lisfOfMemeImgs}
-            </ul>
         </main>
     );
 }
