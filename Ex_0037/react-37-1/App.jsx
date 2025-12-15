@@ -1,8 +1,13 @@
+import React from "react";
+import { languages } from "./languages";
+
 function App() {
   return (
     <main>
       <HeaderSection />
       <StatusSection />
+      <LanguageChipsSection />
+      <WordSection />
     </main>
   );
 }
@@ -25,4 +30,36 @@ function StatusSection() {
   );
 }
 
+function LanguageChipsSection() {
+  // Note that the value of style in JSX is a JS object. We could avoid shortcut by coding:
+  // const styles = { backgroundColor: chip.backgroundColor, color: chip.color }
+  // style={styles}
+  const languageChips = languages.map(
+    (chip, index) => <span
+      key={index}
+      style={{ backgroundColor: chip.backgroundColor, color: chip.color }}
+      className="chip"
+    >{chip.name}</span>
+  );
+  return (
+    <section className="language-chips">
+      {languageChips}
+    </section>
+  )
+}
+
+function WordSection() {
+  const [currentWord, setCurrentWord] = React.useState('react');
+  const currentWordArr = Array.from(currentWord.toUpperCase()); // Their way: currentWord.split('')
+  console.log('* I * WordSection, currentWordArr:', currentWordArr);
+  const letterChips = currentWordArr.map(
+    (letter, index) => <span key={index}>{letter}</span>
+  )
+  return (
+    <section className="word">
+      {letterChips}
+    </section>
+  )
+
+}
 export { App };
