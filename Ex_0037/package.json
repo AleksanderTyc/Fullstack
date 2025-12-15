@@ -1,0 +1,11 @@
+{
+  "name": "ex_0037",
+  "version": "1.0.0",
+  "description": "Capstone II - Assembly Endgame",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "UrlykJ",
+  "license": "ISC"
+}
