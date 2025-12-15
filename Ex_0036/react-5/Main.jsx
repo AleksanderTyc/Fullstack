@@ -50,7 +50,13 @@ function Main() {
     // console.log('* I * refReady while rendering:', refReady);
     // We can see that it is null at first render and it becomes <div> when the IngredientsList component is first rendered.
 
-    React.useEffect(() => { (refReady.current !== null) && refReady.current.scrollIntoView(); }, [recipeContent]);
+    // React.useEffect(() => { (refReady.current !== null) && refReady.current.scrollIntoView(); }, [recipeContent]);
+    React.useEffect(
+        () => {
+            (refReady.current !== null) && refReady.current.scrollIntoView({behavior:"smooth"}); // smooth scrolling
+        },
+        [recipeContent]
+    );
 
     function handleGetRecipe() {
         const responseRecipe = getRecipeFromAI(ingredients);
