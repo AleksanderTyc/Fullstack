@@ -10,10 +10,10 @@ function App() {
   // console.log('* I * App, guessedLetters', guessedLetters);
 
   const correctGuess = guessedLetters.filter(elem => elem.guess).map(elem => elem.character);
-  const isGameWon = 
+  const isGameWon =
     currentWordArr.map(letter => correctGuess.includes(letter)).filter(elem => !elem).length === 0;
   const wrongGuessCount = guessedLetters.filter(elem => !elem.guess).length;
-  const isGameLost = wrongGuessCount >= languages.length -1;
+  const isGameLost = wrongGuessCount >= languages.length - 1;
   const isGameOver = isGameWon || isGameLost;
   console.log('* I * App, isGameWon, isGameOver', isGameWon, isGameOver);
   console.log('* I * App, wrongGuessCount', wrongGuessCount, isGameLost);
@@ -30,7 +30,7 @@ function App() {
   return (
     <main>
       <HeaderSection />
-      <StatusSection />
+      <StatusSection gameLost={isGameLost} gameWon={isGameWon} />
       <LanguageChipsSection wrongCount={wrongGuessCount} />
       <WordSection currWA={currentWordArr} gLetters={guessedLetters} />
       <KeyboardSection gLetters={guessedLetters} handler={handleLetterGuess} />
@@ -43,18 +43,55 @@ function HeaderSection() {
   return (
     <header>
       <h1>Assembly: Endgame</h1>
-      <p>Guess the word in under {languages.length -1} attempts to keep the programming world safe from Assembly!</p>
+      <p>Guess the word in under {languages.length - 1} attempts to keep the programming world safe from Assembly!</p>
     </header>
   );
 }
 
-function StatusSection() {
+function StatusSection(props) {
+  // This design creates an empty section element, which does not size properly, but it is negligible.
+  const className = `game-status ${props.gameWon ? 'won' : ''} ${props.gameLost ? 'lost' : ''}`;
   return (
-    <section className="game-status">
-      <h2>Game over!</h2>
-      <p>You lose! Better start learning Assembly</p>
+    <section className={className}>
+      {props.gameWon ? <h2>You win!</h2> : null}
+      {props.gameWon ? <p>Well done</p> : null}
+      {props.gameLost ? <h2>Game over!</h2> : null}
+      {props.gameLost ? <p>You lose! Better start learning Assembly</p> : null}
     </section>
   );
+  
+  // This is filnal else, but it is not really necessary, because section formatting ensures space taken.
+  /*
+    return (
+      <section className="game-status" style={{visibility:"hidden"}}>
+        <h2>Game over!</h2>
+        <p>You lose! Better start learning Assembly</p>
+      </section>
+    );
+  */
+  // This, however, means that we can perhaps further simplify the code:
+  /*
+    if( props.gameWon ) {
+    return (
+      <section className="game-status won">
+        <h2>You win!</h2>
+        <p>Well done</p>
+      </section>
+    );
+  } else if(props.gameLost) {
+    return (
+      <section className="game-status lost">
+        <h2>Game over!</h2>
+        <p>You lose! Better start learning Assembly</p>
+      </section>
+    );
+  } else {
+    return (
+      <section className="game-status">
+      </section>
+    );
+  }
+  */
 }
 
 function LanguageChipsSection(props) {
