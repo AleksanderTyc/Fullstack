@@ -8,6 +8,8 @@ function App() {
       <StatusSection />
       <LanguageChipsSection />
       <WordSection />
+      <KeyboardSection />
+      <NewGameSection />
     </main>
   );
 }
@@ -59,7 +61,29 @@ function WordSection() {
     <section className="word">
       {letterChips}
     </section>
-  )
-
+  );
 }
+
+function KeyboardSection() {
+  const alphabet = [];
+  for (let index = 65; index < 91; index++) {
+    alphabet.push({
+      idx: index,
+      character: String.fromCharCode(index)
+    });
+  }
+  const keyboardButtons = alphabet.map(charObj => <button key={charObj.idx}>{charObj.character}</button>);
+  return (
+    <section className="keyboard">
+      {keyboardButtons}
+    </section>
+  );
+}
+
+function NewGameSection() {
+  return(
+    <button className="new-game">New Game</button>
+  );
+}
+
 export { App };
