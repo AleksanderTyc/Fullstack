@@ -2,13 +2,28 @@ import React from "react";
 import { languages } from "./languages";
 
 function App() {
+  const [currentWord, setCurrentWord] = React.useState('react');
+  const currentWordArr = Array.from(currentWord.toUpperCase()); // Their way: currentWord.split('')
+
+  const [guessedLetters, setGuessedLetters] = React.useState([]);
+  // console.log('* I * App, guessedLetters', guessedLetters);
+
+  function handleLetterGuess(evt) {
+    // console.log('* I * handleLetterGuess', evt.target.innerText);
+    setGuessedLetters(prev =>
+      prev.includes(evt.target.innerText) ? prev : [
+        ...prev, { character: evt.target.innerText, guess: currentWordArr.includes(evt.target.innerText) }
+      ]
+    );
+  }
+
   return (
     <main>
       <HeaderSection />
       <StatusSection />
       <LanguageChipsSection />
-      <WordSection />
-      <KeyboardSection />
+      <WordSection currWA={currentWordArr} />
+      <KeyboardSection gLetters={guessedLetters} handler={handleLetterGuess} />
       <NewGameSection />
     </main>
   );
@@ -50,11 +65,8 @@ function LanguageChipsSection() {
   )
 }
 
-function WordSection() {
-  const [currentWord, setCurrentWord] = React.useState('react');
-  const currentWordArr = Array.from(currentWord.toUpperCase()); // Their way: currentWord.split('')
-  console.log('* I * WordSection, currentWordArr:', currentWordArr);
-  const letterChips = currentWordArr.map(
+function WordSection(props) {
+  const letterChips = props.currWA.map(
     (letter, index) => <span key={index}>{letter}</span>
   )
   return (
@@ -64,7 +76,8 @@ function WordSection() {
   );
 }
 
-function KeyboardSection() {
+function KeyboardSection(props) {
+  // gLetters={guessedLetters} handler
   const alphabet = [];
   for (let index = 65; index < 91; index++) {
     alphabet.push({
@@ -72,7 +85,17 @@ function KeyboardSection() {
       character: String.fromCharCode(index)
     });
   }
-  const keyboardButtons = alphabet.map(charObj => <button key={charObj.idx}>{charObj.character}</button>);
+  const correctGuessed = props.gLetters.filter(elem => elem.guess).map(elem => elem.character);
+  const incorrectGuessed = props.gLetters.filter(elem => !elem.guess).map(elem => elem.character);
+  const keyboardButtons = alphabet.map(
+    charObj => <button
+      key={charObj.idx}
+      onClick={props.handler}
+      className={correctGuessed.includes(charObj.character) ? "correct" : (incorrectGuessed.includes(charObj.character) ? "wrong" : undefined)}
+    >
+      {charObj.character}
+    </button>
+  );
   return (
     <section className="keyboard">
       {keyboardButtons}
@@ -81,7 +104,7 @@ function KeyboardSection() {
 }
 
 function NewGameSection() {
-  return(
+  return (
     <button className="new-game">New Game</button>
   );
 }
