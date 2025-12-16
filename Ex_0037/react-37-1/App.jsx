@@ -1,5 +1,6 @@
 import React from "react";
 import { languages } from "./languages";
+import { clsx } from "clsx";
 
 function App() {
   const [currentWord, setCurrentWord] = React.useState('react');
@@ -8,13 +9,19 @@ function App() {
   const [guessedLetters, setGuessedLetters] = React.useState([]);
   // console.log('* I * App, guessedLetters', guessedLetters);
 
+  const correctGuess = guessedLetters.filter(elem => elem.guess).map(elem => elem.character);
+  const isGameWon = 
+    currentWordArr.map(letter => correctGuess.includes(letter)).filter(elem => !elem).length === 0;
   const wrongGuessCount = guessedLetters.filter(elem => !elem.guess).length;
-  console.log('* I * App, wrongGuessCount', wrongGuessCount);
+  const isGameLost = wrongGuessCount >= languages.length -1;
+  const isGameOver = isGameWon || isGameLost;
+  console.log('* I * App, isGameWon, isGameOver', isGameWon, isGameOver);
+  console.log('* I * App, wrongGuessCount', wrongGuessCount, isGameLost);
 
   function handleLetterGuess(evt) {
     // console.log('* I * handleLetterGuess', evt.target.innerText);
     setGuessedLetters(prev =>
-      prev.includes(evt.target.innerText) ? prev : [
+      prev.map(elem => elem.character).includes(evt.target.innerText) ? prev : [
         ...prev, { character: evt.target.innerText, guess: currentWordArr.includes(evt.target.innerText) }
       ]
     );
@@ -24,10 +31,10 @@ function App() {
     <main>
       <HeaderSection />
       <StatusSection />
-      <LanguageChipsSection />
+      <LanguageChipsSection wrongCount={wrongGuessCount} />
       <WordSection currWA={currentWordArr} gLetters={guessedLetters} />
       <KeyboardSection gLetters={guessedLetters} handler={handleLetterGuess} />
-      <NewGameSection />
+      {isGameOver && <NewGameSection />}
     </main>
   );
 }
@@ -36,7 +43,7 @@ function HeaderSection() {
   return (
     <header>
       <h1>Assembly: Endgame</h1>
-      <p>Guess the word in under 8 attempts to keep the programming world safe from Assembly!</p>
+      <p>Guess the word in under {languages.length -1} attempts to keep the programming world safe from Assembly!</p>
     </header>
   );
 }
@@ -50,16 +57,26 @@ function StatusSection() {
   );
 }
 
-function LanguageChipsSection() {
+function LanguageChipsSection(props) {
   // Note that the value of style in JSX is a JS object. We could avoid shortcut by coding:
   // const styles = { backgroundColor: chip.backgroundColor, color: chip.color }
   // style={styles}
   const languageChips = languages.map(
-    (chip, index) => <span
-      key={index}
-      style={{ backgroundColor: chip.backgroundColor, color: chip.color }}
-      className="chip"
-    >{chip.name}</span>
+    (chip, index) => {
+      const className = clsx({
+        lost: index < props.wrongCount,
+        chip: true
+      });
+      // Alternatively:
+      // const className = `chip ${(index < props.wrongCount) && "lost"}`;
+      // or
+      // const className = clsx('chip', (index < props.wrongCount) && "lost");
+      return (<span
+        key={index}
+        style={{ backgroundColor: chip.backgroundColor, color: chip.color }}
+        className={className}
+      >{chip.name}</span>);
+    }
   );
   return (
     <section className="language-chips">
@@ -73,7 +90,7 @@ function WordSection(props) {
   const letterChips = props.currWA.map(
     (letter, index) => <span key={index}>
       {correctGuessed.includes(letter) ? letter : " "}
-      </span>
+    </span>
   )
   return (
     <section className="word">
