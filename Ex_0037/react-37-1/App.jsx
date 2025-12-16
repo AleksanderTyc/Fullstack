@@ -8,6 +8,9 @@ function App() {
   const [guessedLetters, setGuessedLetters] = React.useState([]);
   // console.log('* I * App, guessedLetters', guessedLetters);
 
+  const wrongGuessCount = guessedLetters.filter(elem => !elem.guess).length;
+  console.log('* I * App, wrongGuessCount', wrongGuessCount);
+
   function handleLetterGuess(evt) {
     // console.log('* I * handleLetterGuess', evt.target.innerText);
     setGuessedLetters(prev =>
@@ -22,7 +25,7 @@ function App() {
       <HeaderSection />
       <StatusSection />
       <LanguageChipsSection />
-      <WordSection currWA={currentWordArr} />
+      <WordSection currWA={currentWordArr} gLetters={guessedLetters} />
       <KeyboardSection gLetters={guessedLetters} handler={handleLetterGuess} />
       <NewGameSection />
     </main>
@@ -66,8 +69,11 @@ function LanguageChipsSection() {
 }
 
 function WordSection(props) {
+  const correctGuessed = props.gLetters.filter(elem => elem.guess).map(elem => elem.character);
   const letterChips = props.currWA.map(
-    (letter, index) => <span key={index}>{letter}</span>
+    (letter, index) => <span key={index}>
+      {correctGuessed.includes(letter) ? letter : " "}
+      </span>
   )
   return (
     <section className="word">
@@ -96,6 +102,9 @@ function KeyboardSection(props) {
       {charObj.character}
     </button>
   );
+  // With clsx package:
+  // className={clsx({correct:correctGuessed.includes(charObj.character), wrong:incorrectGuessed.includes(charObj.character) })}
+  // can be further separated into individual expressions and lines of code
   return (
     <section className="keyboard">
       {keyboardButtons}
