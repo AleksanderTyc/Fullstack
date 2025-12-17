@@ -17,7 +17,7 @@ function App() {
   const isGameLost = wrongGuessCount >= languages.length - 1;
   const isGameOver = isGameWon || isGameLost;
   const showFarewell = !(guessedLetters.length === 0 || guessedLetters[guessedLetters.length - 1]['guess']);
-  const farewellMessage = !isGameOver && wrongGuessCount > 0 && !guessedLetters[guessedLetters.length - 1]['guess'] ? getFarewellText(languages[wrongGuessCount-1]['name']) : '';
+  const farewellMessage = !isGameOver && wrongGuessCount > 0 && !guessedLetters[guessedLetters.length - 1]['guess'] ? getFarewellText(languages[wrongGuessCount - 1]['name']) : '';
   console.log('* I * App, isGameWon, isGameLost, isGameOver', isGameWon, isGameLost, isGameOver);
   console.log('* I * App, wrongGuessCount, farewellMessage', wrongGuessCount, farewellMessage);
 
@@ -36,7 +36,7 @@ function App() {
       <StatusSection farewellMessage={farewellMessage} gameOver={isGameOver} gameLost={isGameLost} gameWon={isGameWon} />
       <LanguageChipsSection wrongCount={wrongGuessCount} />
       <WordSection currWA={currentWordArr} gLetters={guessedLetters} />
-      <KeyboardSection gLetters={guessedLetters} handler={handleLetterGuess} />
+      <KeyboardSection gameOver={isGameOver} gLetters={guessedLetters} handler={handleLetterGuess} />
       {isGameOver && <NewGameSection />}
     </main>
   );
@@ -156,11 +156,16 @@ function KeyboardSection(props) {
     charObj => <button
       key={charObj.idx}
       onClick={props.handler}
-      className={correctGuessed.includes(charObj.character) ? "correct" : (incorrectGuessed.includes(charObj.character) ? "wrong" : undefined)}
+      disabled={props.gameOver}
+      className={clsx({
+        correct: correctGuessed.includes(charObj.character),
+        wrong: incorrectGuessed.includes(charObj.character)
+      })}
     >
       {charObj.character}
     </button>
   );
+  // className={correctGuessed.includes(charObj.character) ? "correct" : (incorrectGuessed.includes(charObj.character) ? "wrong" : undefined)}
   // With clsx package:
   // className={clsx({correct:correctGuessed.includes(charObj.character), wrong:incorrectGuessed.includes(charObj.character) })}
   // can be further separated into individual expressions and lines of code
