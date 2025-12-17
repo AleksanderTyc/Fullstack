@@ -1,8 +1,7 @@
 import React from "react";
 import { languages } from "./languages";
 import { clsx } from "clsx";
-import { getFarewellText } from "./utils";
-import { words } from "./words";
+import { getFarewellText, getRandomWord } from "./utils";
 
 function App() {
   /*
@@ -24,13 +23,21 @@ function App() {
   // React evaluates the useState expression every time it renders the component,
   // but uses its value only on load.
   // To avoid that behaviour:
-  const [currentWord, setCurrentWord] = React.useState(() => words[Math.floor(Math.random() * words.length)]);
-  
-
-  const currentWordArr = Array.from(currentWord.toUpperCase()); // Their way: currentWord.split('')
+  // const [currentWord, setCurrentWord] = React.useState(() => getRandomWord());
+  // Have a look at "Start a new game" functionality. I like the idea of a utility function more and more.
+  const [currentWord, setCurrentWord] = React.useState('');
 
   const [guessedLetters, setGuessedLetters] = React.useState([]);
   // console.log('* I * App, guessedLetters', guessedLetters);
+
+  function startNewGame() {
+    setCurrentWord(getRandomWord());
+    setGuessedLetters([]);
+  }
+
+  React.useEffect(() => startNewGame(), []);
+
+  const currentWordArr = Array.from(currentWord.toUpperCase()); // Their way: currentWord.split('')
 
   const correctGuess = guessedLetters.filter(elem => elem.guess).map(elem => elem.character);
   const isGameWon =
@@ -57,9 +64,9 @@ function App() {
       <HeaderSection />
       <StatusSection farewellMessage={farewellMessage} gameOver={isGameOver} gameLost={isGameLost} gameWon={isGameWon} />
       <LanguageChipsSection wrongCount={wrongGuessCount} />
-      <WordSection currWA={currentWordArr} gLetters={guessedLetters} />
+      <WordSection gameOver={isGameOver} currWA={currentWordArr} gLetters={guessedLetters} />
       <KeyboardSection gameOver={isGameOver} gLetters={guessedLetters} handler={handleLetterGuess} />
-      {isGameOver && <NewGameSection />}
+      {isGameOver && <NewGameSection handleNewGame={startNewGame} />}
     </main>
   );
 }
@@ -152,8 +159,11 @@ function LanguageChipsSection(props) {
 function WordSection(props) {
   const correctGuessed = props.gLetters.filter(elem => elem.guess).map(elem => elem.character);
   const letterChips = props.currWA.map(
-    (letter, index) => <span key={index}>
-      {correctGuessed.includes(letter) ? letter : " "}
+    (letter, index) => <span
+      key={index}
+      className={`${props.gameOver && !correctGuessed.includes(letter) ? 'missed-letter' : ''}`}
+    >
+      {props.gameOver || correctGuessed.includes(letter) ? letter : " "}
     </span>
   )
   return (
@@ -198,9 +208,9 @@ function KeyboardSection(props) {
   );
 }
 
-function NewGameSection() {
+function NewGameSection(props) {
   return (
-    <button className="new-game">New Game</button>
+    <button onClick={props.handleNewGame} className="new-game">New Game</button>
   );
 }
 
