@@ -5,6 +5,7 @@ import { getFarewellText } from "./utils";
 import { words } from "./words";
 
 function App() {
+  /*
   const [currentWord, setCurrentWord] = React.useState('react');
   React.useEffect(
     () => {
@@ -13,6 +14,19 @@ function App() {
     },
     []
   );
+  */
+  // The above is an overkill, because useState initialises the state only once, at load.
+  // It does not modify the state at rereder.
+  // Their first approach:
+  // const [currentWord, setCurrentWord] = React.useState(words[Math.floor(Math.random() * words.length)]);
+  // Actually they wrapped the words[...] into another utils function and just call that function here.
+  // What is wrong with this approach?
+  // React evaluates the useState expression every time it renders the component,
+  // but uses its value only on load.
+  // To avoid that behaviour:
+  const [currentWord, setCurrentWord] = React.useState(() => words[Math.floor(Math.random() * words.length)]);
+  
+
   const currentWordArr = Array.from(currentWord.toUpperCase()); // Their way: currentWord.split('')
 
   const [guessedLetters, setGuessedLetters] = React.useState([]);
