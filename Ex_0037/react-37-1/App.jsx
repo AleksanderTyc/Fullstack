@@ -1,6 +1,7 @@
 import React from "react";
 import { languages } from "./languages";
 import { clsx } from "clsx";
+import { getFarewellText } from "./utils";
 
 function App() {
   const [currentWord, setCurrentWord] = React.useState('react');
@@ -15,8 +16,10 @@ function App() {
   const wrongGuessCount = guessedLetters.filter(elem => !elem.guess).length;
   const isGameLost = wrongGuessCount >= languages.length - 1;
   const isGameOver = isGameWon || isGameLost;
-  console.log('* I * App, isGameWon, isGameOver', isGameWon, isGameOver);
-  console.log('* I * App, wrongGuessCount', wrongGuessCount, isGameLost);
+  const showFarewell = !(guessedLetters.length === 0 || guessedLetters[guessedLetters.length - 1]['guess']);
+  const farewellMessage = !isGameOver && wrongGuessCount > 0 && !guessedLetters[guessedLetters.length - 1]['guess'] ? getFarewellText(languages[wrongGuessCount-1]['name']) : '';
+  console.log('* I * App, isGameWon, isGameLost, isGameOver', isGameWon, isGameLost, isGameOver);
+  console.log('* I * App, wrongGuessCount, farewellMessage', wrongGuessCount, farewellMessage);
 
   function handleLetterGuess(evt) {
     // console.log('* I * handleLetterGuess', evt.target.innerText);
@@ -30,7 +33,7 @@ function App() {
   return (
     <main>
       <HeaderSection />
-      <StatusSection gameLost={isGameLost} gameWon={isGameWon} />
+      <StatusSection farewellMessage={farewellMessage} gameOver={isGameOver} gameLost={isGameLost} gameWon={isGameWon} />
       <LanguageChipsSection wrongCount={wrongGuessCount} />
       <WordSection currWA={currentWordArr} gLetters={guessedLetters} />
       <KeyboardSection gLetters={guessedLetters} handler={handleLetterGuess} />
@@ -50,16 +53,18 @@ function HeaderSection() {
 
 function StatusSection(props) {
   // This design creates an empty section element, which does not size properly, but it is negligible.
-  const className = `game-status ${props.gameWon ? 'won' : ''} ${props.gameLost ? 'lost' : ''}`;
+  const className = `game-status ${props.gameWon ? 'won' : ''} ${props.gameLost ? 'lost' : ''} ${props.farewellMessage.length > 0 ? 'farewell' : ''}`;
+  // const className = `game-status ${props.gameWon ? 'won' : ''} ${props.gameLost ? 'lost' : ''}  farewell`;
   return (
     <section className={className}>
       {props.gameWon ? <h2>You win!</h2> : null}
       {props.gameWon ? <p>Well done</p> : null}
       {props.gameLost ? <h2>Game over!</h2> : null}
       {props.gameLost ? <p>You lose! Better start learning Assembly</p> : null}
+      {props.farewellMessage.length > 0 ? <p className="farewell-message">{props.farewellMessage}</p> : null}
     </section>
   );
-  
+
   // This is filnal else, but it is not really necessary, because section formatting ensures space taken.
   /*
     return (
