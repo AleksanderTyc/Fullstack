@@ -2,9 +2,17 @@ import React from "react";
 import { languages } from "./languages";
 import { clsx } from "clsx";
 import { getFarewellText } from "./utils";
+import { words } from "./words";
 
 function App() {
   const [currentWord, setCurrentWord] = React.useState('react');
+  React.useEffect(
+    () => {
+      const wordSelected = words[Math.floor(Math.random() * words.length)];
+      setCurrentWord(wordSelected);
+    },
+    []
+  );
   const currentWordArr = Array.from(currentWord.toUpperCase()); // Their way: currentWord.split('')
 
   const [guessedLetters, setGuessedLetters] = React.useState([]);
@@ -18,8 +26,8 @@ function App() {
   const isGameOver = isGameWon || isGameLost;
   const showFarewell = !(guessedLetters.length === 0 || guessedLetters[guessedLetters.length - 1]['guess']);
   const farewellMessage = !isGameOver && wrongGuessCount > 0 && !guessedLetters[guessedLetters.length - 1]['guess'] ? getFarewellText(languages[wrongGuessCount - 1]['name']) : '';
-  console.log('* I * App, isGameWon, isGameLost, isGameOver', isGameWon, isGameLost, isGameOver);
-  console.log('* I * App, wrongGuessCount, farewellMessage', wrongGuessCount, farewellMessage);
+  // console.log('* I * App, isGameWon, isGameLost, isGameOver', isGameWon, isGameLost, isGameOver);
+  // console.log('* I * App, wrongGuessCount, farewellMessage', wrongGuessCount, farewellMessage);
 
   function handleLetterGuess(evt) {
     // console.log('* I * handleLetterGuess', evt.target.innerText);
