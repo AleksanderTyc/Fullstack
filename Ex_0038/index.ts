@@ -89,6 +89,30 @@ function completeOrder(orderId: number) {
 // builds a reference to the array's member, not a copy of it.
 // In result, requestOrder.status === 'complete' at the end of the function (returned value).
 
+
+// Here is example of type narrowing - we specify that identifier can only be a string or a number.
+/*
+// Here is my take - does not reveal certain TS features
+function getPizzaDetail(identifier: string | number) {
+    const typeOfIdentifier = typeof identifier;
+    console.log(typeOfIdentifier, `string: ${typeOfIdentifier === 'string'}`, `number: ${typeOfIdentifier === 'number'}`);
+    const pizzaDetail = menu.find(elem => typeOfIdentifier === 'string' ? elem.name === identifier : elem.id === identifier);
+    return pizzaDetail;
+}
+*/
+// Here is their take
+function getPizzaDetail(identifier: string | number) {
+    if( typeof identifier === 'string') {
+        return menu.find(pizza => pizza.name.toLowerCase() === identifier.toLowerCase());
+    } else if( typeof identifier === 'number') {
+        return menu.find(pizza => pizza.id === identifier);
+    } else {
+        throw new TypeError("Argument `identifier` must either be string or a number");
+    }
+}
+// It is possible to import this function to another module, a JS module, where types are not verified.
+// Throwing an error will improve developer's experience and code's usability.
+
 // completeOrder('1'); // Argument of type 'string' is not assignable to parameter of type 'number'.ts(2345)
 completeOrder(1); // No grief
 
@@ -107,3 +131,7 @@ const o4 = placeOrder('BBQ Chicken');
 console.log(o4);
 const s4 = completeOrder(3);
 console.log(s4);
+
+console.log(getPizzaDetail('a'));
+console.log(getPizzaDetail(1));
+console.log(getPizzaDetail('Veggie'));
