@@ -13,6 +13,8 @@ type UserRole = "User" | "Admin" | "Guest";
 // This applies to Pizza example:
 type OrderStatus = 'ordered' | 'complete';
 
+let nextPizzaId : number = 1;
+
 // Custom type
 type Pizza = {
     id: number,
@@ -27,12 +29,13 @@ type Order = {
 };
 
 const menu: Pizza[] = [
-    { id: 1, name: "Margherita", price: 8 },
-    { id: 2, name: "Pepperoni", price: 10 },
-    { id: 3, name: "Hawaiian", price: 10 },
-    { id: 4, name: "Veggie", price: 9 }
-
+    { id: nextPizzaId++, name: "Margherita", price: 8 },
+    { id: nextPizzaId++, name: "Pepperoni", price: 10 },
+    { id: nextPizzaId++, name: "Hawaiian", price: 10 },
+    { id: nextPizzaId++, name: "Veggie", price: 9 }
 ];
+
+addNewPizza({ id: nextPizzaId++, name: "BBQ Chicken", price: 15 });
 
 // This won't work - cash is modified later in the code
 let cashInRegister = 100;
@@ -101,7 +104,7 @@ function getPizzaDetail(identifier: string | number) {
 }
 */
 // Here is their take
-function getPizzaDetail(identifier: string | number) {
+function getPizzaDetail(identifier: string | number) : Pizza | undefined {
     if( typeof identifier === 'string') {
         return menu.find(pizza => pizza.name.toLowerCase() === identifier.toLowerCase());
     } else if( typeof identifier === 'number') {
@@ -115,8 +118,6 @@ function getPizzaDetail(identifier: string | number) {
 
 // completeOrder('1'); // Argument of type 'string' is not assignable to parameter of type 'number'.ts(2345)
 completeOrder(1); // No grief
-
-addNewPizza({ id: 5, name: "BBQ Chicken", price: 15 });
 
 const o1 = placeOrder('Veggie');
 console.log(o1);
