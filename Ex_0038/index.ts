@@ -16,11 +16,11 @@ const gameScores = [14, 21, 32, 43, 59];
 const favColours = ['red', 'yellow', 'blue'];
 const voters = [{ name: 'Alice', age: 42 }, { name: 'Bob', age: 77 }];
 
-function getLastItem<TypeHolder>(array: Array<TypeHolder>) : TypeHolder | undefined{
-// All this means is that getLastItem "depends" on type which we refer to as "TypeHolder",
-// just to describe the shape, signature of that dependency. Here we have two dependencies:
-// - getLastItem takes a parameter typed Array<TypeHolder>
-// - getLastItem returns a value which is either undefined or it is an Object of type TypeHolder.
+function getLastItem<TypeHolder>(array: Array<TypeHolder>): TypeHolder | undefined {
+    // All this means is that getLastItem "depends" on type which we refer to as "TypeHolder",
+    // just to describe the shape, signature of that dependency. Here we have two dependencies:
+    // - getLastItem takes a parameter typed Array<TypeHolder>
+    // - getLastItem returns a value which is either undefined or it is an Object of type TypeHolder.
     return array[array.length - 1];
 }
 console.log(`* I * getLastItem * gameScores : ${getLastItem(gameScores)}`);
@@ -64,6 +64,17 @@ const orderQueue: Order[] = []; // Alternatively orderQueue : Array<Order>
 // This won't work - nextOrderId is modified later in the code
 let nextOrderId = 1;
 // Changing both const's into let's makes the code usable, but this is not the point of the exercise.
+
+function addToArray<T>(array: Array<T>, item: T): Array<T> {
+    array.push(item);
+    return array;
+}
+
+addToArray<Pizza>(menu,{ id:nextPizzaId++, name: "Capricciosa", price: 11 });
+// addToArray<Order>(orderQueue,{ pizza: menu[1], status: "ordered", orderId: nextOrderId++ });
+// The above does not work, because menu[1] is typed as Pizza | undefined.
+// addToArray(orderQueue,{ pizza: { id: 2, name: "Pepperoni", price: 10 }, status: "ordered", orderId: nextOrderId++ });
+
 
 function addNewPizza(newPizzaDetails: Omit<Pizza, "id">): Pizza {
     const newPizza: Pizza = { id: nextPizzaId++, ...newPizzaDetails };
@@ -137,7 +148,9 @@ function getPizzaDetail(identifier: string | number): Pizza | undefined {
 // Throwing an error will improve developer's experience and code's usability.
 
 // completeOrder('1'); // Argument of type 'string' is not assignable to parameter of type 'number'.ts(2345)
-completeOrder(1); // No grief
+// completeOrder(1); // No grief
+
+console.log('* I * menu', menu);
 
 const o1 = placeOrder('Veggie');
 console.log(o1);
