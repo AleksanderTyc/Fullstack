@@ -3,6 +3,15 @@
 let name: string = 'Bob'; // Explicit type delaration
 let numberOfWheels: number = 4;
 let isStudent: boolean = true;
+// const numberOfWindows = 5; // Literal type
+// const numberOfWindows :5 = 5; // Literal type - explicit type declaration
+// let numberOfWindows : 5 = 5; // Literal type - effectively this is a const:
+// numberOfWindows = 3; // Type '3' is not assignable to type '5'.ts(2322)
+// Literal types are useful when we want to limit the domain of a variable,
+// e.g. user role may be User, Admin or Guest, but not Hacker or adsblkadfkla. Use Union:
+type UserRole = "User" | "Admin" | "Guest";
+// This applies to Pizza example:
+type OrderStatus = 'ordered' | 'complete';
 
 // Custom type
 type Pizza = {
@@ -12,7 +21,7 @@ type Pizza = {
 
 type Order = {
     pizza: Pizza,
-    status?: string, // this is optional, i.e. an instance without status is also TS-correct
+    status?: OrderStatus, // this is optional, i.e. an instance without status is also TS-correct
     orderId: number
 };
 
@@ -46,7 +55,9 @@ function placeOrder(pizzaName: string) {
     }
     // Their way: menu.find(elem => elem.name === pizzaName);
     cashInRegister += pizzaOrder.price;
-    const newOrder = { pizza: pizzaOrder, status: "ordered", orderId: nextOrderId++ };
+    const newOrder: Order = { pizza: pizzaOrder, status: "ordered", orderId: nextOrderId++ };
+    // Explicitly defining newOrder as Order allows TS to recognise that status is of type OrderStatus.
+    // Otherwise it would infer the status type to be string, and this would cause conflict in the line below.
     orderQueue.push(newOrder);
     return newOrder;
 }
