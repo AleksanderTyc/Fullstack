@@ -13,7 +13,7 @@ type UserRole = "User" | "Admin" | "Guest";
 // This applies to Pizza example:
 type OrderStatus = 'ordered' | 'complete';
 
-let nextPizzaId : number = 1;
+let nextPizzaId: number = 1;
 
 // Custom type
 type Pizza = {
@@ -35,7 +35,8 @@ const menu: Pizza[] = [
     { id: nextPizzaId++, name: "Veggie", price: 9 }
 ];
 
-addNewPizza({ id: nextPizzaId++, name: "BBQ Chicken", price: 15 });
+// addNewPizza({ id: nextPizzaId++, name: "BBQ Chicken", price: 15 });
+addNewPizza({ name: "BBQ Chicken", price: 15 });
 
 // This won't work - cash is modified later in the code
 let cashInRegister = 100;
@@ -47,8 +48,10 @@ const orderQueue: Order[] = []; // Alternatively orderQueue : Array<Order>
 let nextOrderId = 1;
 // Changing both const's into let's makes the code usable, but this is not the point of the exercise.
 
-function addNewPizza(newPizza: Pizza) {
+function addNewPizza(newPizzaDetails: Omit<Pizza, "id">) : Pizza{
+    const newPizza: Pizza = { id: nextPizzaId++, ...newPizzaDetails };
     menu.push(newPizza);
+    return newPizza;
 }
 
 function placeOrder(pizzaName: string) {
@@ -104,10 +107,10 @@ function getPizzaDetail(identifier: string | number) {
 }
 */
 // Here is their take
-function getPizzaDetail(identifier: string | number) : Pizza | undefined {
-    if( typeof identifier === 'string') {
+function getPizzaDetail(identifier: string | number): Pizza | undefined {
+    if (typeof identifier === 'string') {
         return menu.find(pizza => pizza.name.toLowerCase() === identifier.toLowerCase());
-    } else if( typeof identifier === 'number') {
+    } else if (typeof identifier === 'number') {
         return menu.find(pizza => pizza.id === identifier);
     } else {
         throw new TypeError("Argument `identifier` must either be string or a number");
