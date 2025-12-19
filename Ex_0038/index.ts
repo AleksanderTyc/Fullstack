@@ -15,6 +15,7 @@ type OrderStatus = 'ordered' | 'complete';
 
 // Custom type
 type Pizza = {
+    id: number,
     name: string,
     price: number
 };
@@ -25,11 +26,11 @@ type Order = {
     orderId: number
 };
 
-const menu = [
-    { name: "Margherita", price: 8 },
-    { name: "Pepperoni", price: 10 },
-    { name: "Hawaiian", price: 10 },
-    { name: "Veggie", price: 9 }
+const menu: Pizza[] = [
+    { id: 1, name: "Margherita", price: 8 },
+    { id: 2, name: "Pepperoni", price: 10 },
+    { id: 3, name: "Hawaiian", price: 10 },
+    { id: 4, name: "Veggie", price: 9 }
 
 ];
 
@@ -91,12 +92,18 @@ function completeOrder(orderId: number) {
 // completeOrder('1'); // Argument of type 'string' is not assignable to parameter of type 'number'.ts(2345)
 completeOrder(1); // No grief
 
+addNewPizza({ id: 5, name: "BBQ Chicken", price: 15 });
+
 const o1 = placeOrder('Veggie');
-console.log( o1 );
+console.log(o1);
 const o2 = placeOrder('Pepperoni');
-console.log( o2 );
+console.log(o2);
 const o3 = placeOrder('DoDupy');
-console.log( o3 );
+console.log(o3);
 const s2 = completeOrder(2);
-console.log( s2 );
+console.log(s2);
 console.log(orderQueue);
+const o4 = placeOrder('BBQ Chicken');
+console.log(o4);
+const s4 = completeOrder(3);
+console.log(s4);
