@@ -10,7 +10,24 @@ let isStudent: boolean = true;
 // Literal types are useful when we want to limit the domain of a variable,
 // e.g. user role may be User, Admin or Guest, but not Hacker or adsblkadfkla. Use Union:
 type UserRole = "User" | "Admin" | "Guest";
-// This applies to Pizza example:
+
+// Exercise about Generic Types
+const gameScores = [14, 21, 32, 43, 59];
+const favColours = ['red', 'yellow', 'blue'];
+const voters = [{ name: 'Alice', age: 42 }, { name: 'Bob', age: 77 }];
+
+function getLastItem<TypeHolder>(array: Array<TypeHolder>) : TypeHolder | undefined{
+// All this means is that getLastItem "depends" on type which we refer to as "TypeHolder",
+// just to describe the shape, signature of that dependency. Here we have two dependencies:
+// - getLastItem takes a parameter typed Array<TypeHolder>
+// - getLastItem returns a value which is either undefined or it is an Object of type TypeHolder.
+    return array[array.length - 1];
+}
+console.log(`* I * getLastItem * gameScores : ${getLastItem(gameScores)}`);
+console.log(`* I * getLastItem * favColours : ${getLastItem(favColours)}`);
+console.log(`* I * getLastItem * voters :`, getLastItem(voters));
+
+// Literal type applies to Pizza example:
 type OrderStatus = 'ordered' | 'complete';
 
 let nextPizzaId: number = 1;
@@ -48,7 +65,7 @@ const orderQueue: Order[] = []; // Alternatively orderQueue : Array<Order>
 let nextOrderId = 1;
 // Changing both const's into let's makes the code usable, but this is not the point of the exercise.
 
-function addNewPizza(newPizzaDetails: Omit<Pizza, "id">) : Pizza{
+function addNewPizza(newPizzaDetails: Omit<Pizza, "id">): Pizza {
     const newPizza: Pizza = { id: nextPizzaId++, ...newPizzaDetails };
     menu.push(newPizza);
     return newPizza;
