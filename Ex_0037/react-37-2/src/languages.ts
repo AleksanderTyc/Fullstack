@@ -4,7 +4,7 @@ type Language = {
     color: string
 };
 
-export const languages: Array<Language> = [
+const languages: Array<Language> = [
     {
         name: "HTML",
         backgroundColor: "#E2680F",
@@ -50,4 +50,7 @@ export const languages: Array<Language> = [
         backgroundColor: "#2D519F",
         color: "#F9F4DA",
     },
-]
+];
+
+export type { Language };
+export { languages };
