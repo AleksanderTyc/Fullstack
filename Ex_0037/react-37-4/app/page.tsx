@@ -1,5 +1,4 @@
 import Image from "next/image";
-
 import HeroImage from '@/public/hero-image.png';
 
 export default function Home() {
