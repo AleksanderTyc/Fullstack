@@ -1,5 +1,10 @@
 import "./globals.css";
+
+import PrintforgeLogoIcon from '@/public/printforge-logo-icon.svg';
+import PrintforgeLogo from '@/public/printforge-logo.svg';
+
 import { Albert_Sans, Montserrat_Alternates } from "next/font/google";
+import Image from "next/image";
 
 const albertSans = Albert_Sans({
   subsets:['latin'],
@@ -27,14 +32,14 @@ export default function RootLayout({
           <nav className="flex justify-between px-6 py-4">
             <div className="relative">
               {/* Desktop icon */}
-              <img
-                src="/printforge-logo.svg"
+              <Image
+                src={PrintforgeLogo}
                 alt="printforge logo home"
                 className="w-[200px] h-auto hidden md:block"
               />
               {/* Mobile icon */}
-              <img
-                src="/printforge-logo-icon.svg"
+              <Image
+                src={PrintforgeLogoIcon}
                 alt="printforge logo icon home"
                 className="w-[40px] h-auto hidden md:hidden"
               />
