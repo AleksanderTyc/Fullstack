@@ -9,6 +9,8 @@ import Image from "next/image";
 // Link - client side navigation - no page reload, state is preserved, interactivity is continued
 import Link from "next/link";
 
+import { RootLayoutPropsType } from '@/app/types/index';
+
 const albertSans = Albert_Sans({
   subsets: ['latin'],
   display: 'swap'
@@ -23,11 +25,7 @@ const montserratAlternates = Montserrat_Alternates({
   variable: '--font-montserrat-alternates'
 });
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: RootLayoutPropsType) {
   return (
     <html lang="en">
       <body className={`${albertSans.className} ${montserratAlternates.variable}`}>
