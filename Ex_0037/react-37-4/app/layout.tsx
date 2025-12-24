@@ -48,7 +48,7 @@ export default function RootLayout({ children }: RootLayoutPropsType) {
               </div>
             </Link>
             <ul className="flex items-center gap-2.5 uppercase">
-              <li>3D models</li>
+              <li><Link href="/3d-models">3D models</Link></li>
               <li><Link href="/about">about</Link></li>
             </ul>
           </nav>
