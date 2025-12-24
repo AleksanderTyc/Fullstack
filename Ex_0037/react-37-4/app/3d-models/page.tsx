@@ -1,6 +1,6 @@
 import { getAllModels } from "@/app/lib/models";
-import { Model } from "../types";
-import { JSX } from 'react';
+import type { Model } from "../types";
+import type { JSX } from 'react';
 
 export default async function ThreeDModelsPage() {
   const allModels: Model[] = await getAllModels();
