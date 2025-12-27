@@ -1,4 +1,16 @@
 import { getAllModels } from "@/app/lib/models";
+import { ModelsGrid } from "../components/ModelsGrid";
+
+import type { Model } from "../types";
+
+export default async function ThreeDModelsPage() {
+  const allModels: Model[] = await getAllModels();
+  return (<ModelsGrid title="All Models" models={allModels} />);
+}
+
+/*
+// Before refactor:
+import { getAllModels } from "@/app/lib/models";
 import { ModelCard } from '@/app/components/ModelCard';
 
 import type { Model } from "../types";
@@ -25,3 +37,4 @@ export default async function ThreeDModelsPage() {
     </div>
   );
 }
+*/

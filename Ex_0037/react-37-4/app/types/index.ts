@@ -12,13 +12,35 @@ type Model = {
     dateAdded: string
 };
 
+type Category = {
+    displayName: string,
+    slug: string
+};
+
 type PillProps = {
     children: ReactNode
     className?: string
 };
 
 type ModelDetailPageProps = {
-    params: {id: number}
+    params: Promise<{ id: number }>
 };
 
-export type { RootLayoutPropsType, Model, PillProps, ModelDetailPageProps };
+type IndividualCategoryPageProps = {
+    params: Promise<{ categoryName: string }>
+};
+
+type ModelsGridProps = {
+    title: string,
+    models: Array<Model>
+};
+
+export type {
+    RootLayoutPropsType,
+    Model,
+    Category,
+    PillProps,
+    ModelDetailPageProps,
+    IndividualCategoryPageProps,
+    ModelsGridProps
+};
