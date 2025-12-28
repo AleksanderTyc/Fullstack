@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 
-type RootLayoutPropsType = Readonly<{ children: React.ReactNode }>;
+type RootLayoutPropsType = Readonly<{ children: ReactNode }>;
 
 type Model = {
     id: number,
@@ -35,6 +35,12 @@ type ModelsGridProps = {
     models: Array<Model>
 };
 
+type LinkComponentProps = {
+    className: string,
+    href: string,
+    display: string | ReactNode
+};
+
 export type {
     RootLayoutPropsType,
     Model,
@@ -42,5 +48,6 @@ export type {
     PillProps,
     ModelDetailPageProps,
     IndividualCategoryPageProps,
-    ModelsGridProps
+    ModelsGridProps,
+    LinkComponentProps
 };

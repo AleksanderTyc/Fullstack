@@ -4,6 +4,7 @@ import Image from "next/image";
 import PrintforgeLogoIcon from '@/public/printforge-logo-icon.svg';
 import PrintforgeLogo from '@/public/printforge-logo.svg';
 
+import { LinkComponent } from "@/app/components/LinkComponent";
 
 function Navbar() {
     return (
@@ -26,8 +27,8 @@ function Navbar() {
                     </div>
                 </Link>
                 <ul className="flex items-center gap-2.5 uppercase">
-                    <li><Link href="/3d-models">3D models</Link></li>
-                    <li><Link href="/about">about</Link></li>
+                    <li><LinkComponent className='' href="/3d-models" display='3D models' /></li>
+                    <li><LinkComponent className='' href="/about" display='about' /></li>
                 </ul>
             </nav>
         </header>
