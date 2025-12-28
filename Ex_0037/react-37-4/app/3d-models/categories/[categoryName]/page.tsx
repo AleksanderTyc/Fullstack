@@ -1,12 +1,13 @@
 import type { JSX } from "react";
-import type { Category, IndividualCategoryPageProps } from "@/app/types";
+import type { Model, IndividualCategoryPageProps } from "@/app/types";
 
-import { getCategoryBySlug } from "@/app/lib/categories";
+import { getModelsBySlug } from "@/app/lib/models";
+import { getCategoryNameBySlug } from "@/app/lib/categories";
+import { ModelsGrid } from "@/app/components/ModelsGrid";
 
 export default async function IndividualCategoryPage({ params }: IndividualCategoryPageProps): Promise<JSX.Element> {
   const { categoryName } = await params;
-  const category: Category = getCategoryBySlug(categoryName);
-  return (
-    <h1>{category.slug}, {category.displayName}</h1>
-  );
+  const relevantModels: Model[] = await getModelsBySlug(categoryName);
+  const relevantTitle: string = categoryName === 'all' ? 'All Models' : getCategoryNameBySlug(categoryName);
+  return (<ModelsGrid title={relevantTitle} models={relevantModels} />);
 }

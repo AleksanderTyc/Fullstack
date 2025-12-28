@@ -471,7 +471,7 @@ const testModels: Array<Model> = [
     }
 ];
 
-async function getAllModels() {
+async function getAllModels(): Promise<Array<Model>> {
     return testModels;
 }
 
@@ -483,4 +483,15 @@ async function getModelById(id: number | string): Promise<Model> {
     return searchedModel;
 }
 
-export { getAllModels, getModelById };
+async function getModelsBySlug(slug: string): Promise<Array<Model>> {
+    if (slug === 'all') {
+        return getAllModels();
+    } else {
+        const searchedModels: Array<Model> = testModels.filter(
+            (model:Model) : boolean => model.category === slug
+        );
+        return searchedModels;
+    }
+}
+
+export { getAllModels, getModelById, getModelsBySlug };
