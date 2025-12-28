@@ -1,10 +1,17 @@
+'use client'
+
 import type { JSX } from "react";
 import Link from "next/link";
 
 import type { Category } from "@/app/types";
 import { getAllCategories } from "@/app/lib/categories";
 
+import { usePathname } from "next/navigation";
+
 export default function CategoriesPage(): JSX.Element {
+
+  const pathName = usePathname();
+  console.log('* I * usePathname is', pathName);
 
   const categories: Category[] = getAllCategories();
   const renderedCategories: Array<JSX.Element> = categories.map(
