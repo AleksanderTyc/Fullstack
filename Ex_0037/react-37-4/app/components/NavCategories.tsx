@@ -16,7 +16,7 @@ export default function NavCategories(): JSX.Element {
   );
   renderedCategories.unshift(
     <li key='all'>
-      <Link href={`/3d-models/categories/all`}>
+      <Link href={`/3d-models`}>
         All
       </Link>
     </li>

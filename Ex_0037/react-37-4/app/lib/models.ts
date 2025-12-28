@@ -484,14 +484,10 @@ async function getModelById(id: number | string): Promise<Model> {
 }
 
 async function getModelsBySlug(slug: string): Promise<Array<Model>> {
-    if (slug === 'all') {
-        return getAllModels();
-    } else {
-        const searchedModels: Array<Model> = testModels.filter(
-            (model:Model) : boolean => model.category === slug
-        );
-        return searchedModels;
-    }
+    const searchedModels: Array<Model> = testModels.filter(
+        (model: Model): boolean => model.category === slug
+    );
+    return searchedModels;
 }
 
 export { getAllModels, getModelById, getModelsBySlug };

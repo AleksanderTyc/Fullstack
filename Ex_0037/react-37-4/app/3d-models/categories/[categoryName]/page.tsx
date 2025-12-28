@@ -8,6 +8,6 @@ import { ModelsGrid } from "@/app/components/ModelsGrid";
 export default async function IndividualCategoryPage({ params }: IndividualCategoryPageProps): Promise<JSX.Element> {
   const { categoryName } = await params;
   const relevantModels: Model[] = await getModelsBySlug(categoryName);
-  const relevantTitle: string = categoryName === 'all' ? 'All Models' : getCategoryNameBySlug(categoryName);
+  const relevantTitle: string = getCategoryNameBySlug(categoryName);
   return (<ModelsGrid title={relevantTitle} models={relevantModels} />);
 }
