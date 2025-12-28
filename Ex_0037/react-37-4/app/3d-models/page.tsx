@@ -5,7 +5,7 @@ import type { Model } from "../types";
 
 export default async function ThreeDModelsPage() {
   const allModels: Model[] = await getAllModels();
-  return (<ModelsGrid title="All MMModels" models={allModels} />);
+  return (<ModelsGrid title="All Models" models={allModels} />);
 }
 
 /*
