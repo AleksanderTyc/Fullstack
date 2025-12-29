@@ -9,7 +9,7 @@ import type { LinkComponentProps } from "@/app/types";
 function LinkComponent(props: LinkComponentProps ): JSX.Element {
     const currentPath = usePathname();
     const linkSelected: boolean = currentPath === props.href;
-    const actualClassName = props.className + (linkSelected ? " text-orange-accent" : "");
+    const actualClassName = props.className + (linkSelected ? " currently-active" : "");
     return (
         <Link className={actualClassName} href={props.href}>
             {props.display}
