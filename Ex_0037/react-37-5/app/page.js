@@ -1,8 +1,13 @@
-export const dynamic = 'force-dynamic';
-
-import Image from "next/image";
 
 async function getCatFact() {
+  const res = await fetch('https://catfact.ninja/fact');
+  const data = res.json();
+  return data;
+}
+
+async function getCatFactStatic() {
+  // export const dynamic = 'force-dynamic';
+
   return (
     { fact: 'Cats step both left legs, then both right legs, when they walk.' }
   );
