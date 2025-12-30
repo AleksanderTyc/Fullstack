@@ -1,6 +1,6 @@
 
 async function getCatFact() {
-  const res = await fetch('https://catfact.ninja/fact');
+  const res = await fetch('https://catfact.ninja/fact', { cache: 'no-store' });
   const data = res.json();
   return data;
 }
