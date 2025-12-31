@@ -23,10 +23,16 @@ async function getCatFactStatic() {
   );
 }
 
-export default async function Home() {
+export default async function Home({searchParams}) {
+  const {query} = await searchParams;
+  console.log('* I * Home', query);
   // const catFact = await getCatFact();
-  const catFacts = await getCatFacts();
+  let catFacts = await getCatFacts();
   const timeStamp = new Date().toLocaleString();
+  
+  if( query !== undefined ) {
+    catFacts = catFacts.filter(fact => fact.fact.toLowerCase().includes(query.toLowerCase()));
+  }
 
   function handleFormAction(formData) {
     console.log('* I * handleFormAction', formData);
@@ -41,7 +47,10 @@ export default async function Home() {
       <main className="main">
         <h1>Cat Facts</h1>
         <form>
-          <input type="text" name="query" placeholder="Search for..."></input>
+          <label>
+            Search
+          <input type="text" name="query" placeholder="e.g. food or traits"></input>
+          </label>
         </form>
         <p className="timestamp">Rendered at {timeStamp}</p>
         {renderedCatFacts}
