@@ -1,5 +1,6 @@
 // export const dynamic = 'force-dynamic';
 
+import Form from 'next/form';
 
 async function getCatFact() {
   // const res = await fetch('https://catfact.ninja/fact', { cache: 'no-store' }); // SSR
@@ -46,12 +47,12 @@ export default async function Home({searchParams}) {
     <div className="page">
       <main className="main">
         <h1>Cat Facts</h1>
-        <form>
+        <Form>
           <label>
             Search
           <input type="text" name="query" placeholder="e.g. food or traits"></input>
           </label>
-        </form>
+        </Form>
         <p className="timestamp">Rendered at {timeStamp}</p>
         {renderedCatFacts}
       </main>
