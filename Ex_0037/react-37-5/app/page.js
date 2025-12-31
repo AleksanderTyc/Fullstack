@@ -28,6 +28,10 @@ export default async function Home() {
   const catFacts = await getCatFacts();
   const timeStamp = new Date().toLocaleString();
 
+  function handleFormAction(formData) {
+    console.log('* I * handleFormAction', formData);
+  }
+
   const renderedCatFacts = catFacts.map((fact, index) => <div key={index} className="fact-card">
     <p className="fact-text">{fact.fact}</p>
   </div>
@@ -36,6 +40,9 @@ export default async function Home() {
     <div className="page">
       <main className="main">
         <h1>Cat Facts</h1>
+        <form>
+          <input type="text" name="query" placeholder="Search for..."></input>
+        </form>
         <p className="timestamp">Rendered at {timeStamp}</p>
         {renderedCatFacts}
       </main>
