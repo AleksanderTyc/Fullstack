@@ -3,9 +3,36 @@ import { ModelsGrid } from "../components/ModelsGrid";
 
 import type { Model } from "../types";
 
-export default async function ThreeDModelsPage() {
+type ThreeDModelsPageParams = {
+  searchParams: Promise<{ query: string }>
+};
+
+//Promise<{ [key: string]: string | string[] | undefined }>
+export default async function ThreeDModelsPage({ searchParams }: { searchParams: Promise<{ query: string }> }) {
+  const { query } = await searchParams;
+  console.log('* I * ThreeDModelsPage', query);
+
   const allModels: Model[] = await getAllModels();
-  return (<ModelsGrid title="All Models" models={allModels} />);
+  let relevantModels = allModels;
+  if (query !== undefined) {
+    relevantModels = allModels.filter(
+      model => model.name.toLowerCase().includes(query.toLowerCase())
+        || model.description.toLowerCase().includes(query.toLowerCase())
+    );
+  }
+  return (
+    <>
+      <form className="w-full px-5 md:px-0 md:max-w-xl">
+        <input
+          type="text"
+          name="query"
+          placeholder="art, toy, ..."
+          defaultValue={query}
+          className="w-full py-3 pl-5 pr-5 text-sm placeholder-gray-500 bg-white border border-[#606060] rounded-full focus:border-[#606060] focus:outline-none focus:ring-0 md:text-base"
+        ></input>
+      </form>
+      <ModelsGrid title="All Models" models={relevantModels} />
+    </>);
 }
 
 /*

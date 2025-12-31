@@ -27,7 +27,8 @@ type ModelDetailPageProps = {
 };
 
 type IndividualCategoryPageProps = {
-    params: Promise<{ categoryName: string }>
+    params: Promise<{ categoryName: string }>,
+    searchParams: Promise<{ query: string }>
 };
 
 type ModelsGridProps = {
